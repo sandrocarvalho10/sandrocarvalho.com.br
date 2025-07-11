@@ -3,13 +3,12 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "^14.2.15",
     "next": "^15.3.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
