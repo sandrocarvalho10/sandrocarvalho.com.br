@@ -1,10 +1,15 @@
+import { archivo } from "@/fonts/index"
+
+
+
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-br">
+    <html lang="en" className={archivo.className}>
       <body>{children}</body>
     </html>
   )
