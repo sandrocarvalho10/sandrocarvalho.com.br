@@ -1,3 +1,13 @@
+import { Header } from "screens/landingPage/header"
+
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+  return (
+    <div className="flex flex-col w-full max-w-2xl mx-auto">
+        <Header />
+        <div>
+
+        </div>
+
+    </div>
+  )
 }
