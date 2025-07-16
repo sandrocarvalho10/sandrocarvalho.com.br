@@ -1,5 +1,7 @@
-import { useState } from "react";
+'use client'
 import { Menu, X } from "lucide-react";
+import { Button } from "@/styles/components/ui/button";
+import { useState } from "react";
 // import { Button } from "@/components/ui/button"; // Opcional: usando shadcn/ui
 
 const navigation = [
@@ -13,7 +15,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full fixed top-0 z-50 bg-white shadow-sm">
+    <header className="w-full fixed top-0 z-50 bg-white shadow-sm bg-red">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="text-xl font-bold text-blue-600">
