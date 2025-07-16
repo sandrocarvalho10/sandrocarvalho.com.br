@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 13 13 13;
+    --foreground: 234 234 234;
+    --muted: 156 163 175;
+    --muted-foreground: 107 114 128;
+    --border: 31 41 55;
+    --input: 31 41 55;
+    --ring: 74 222 128;
+    --primary: 74 222 128;
+    --primary-foreground: 13 13 13;
+    --secondary: 31 41 55;
+    --secondary-foreground: 234 234 234;
+    --destructive: 239 68 68;
+    --destructive-foreground: 254 202 202;
+    --accent: 55 65 81;
+    --accent-foreground: 234 234 234;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
