@@ -1,7 +1,7 @@
 'use client';
 
+
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/styles/components/ui/button';
 import { useState } from 'react';
 
 const navigation = [
@@ -35,9 +35,9 @@ export function Header() {
 
         {/* Botão de ação */}
         <div className="hidden md:block">
-          <Button asChild>
+          <button >
             <a href="#comecar">Começar</a>
-          </Button>
+          </button>
         </div>
 
         {/* Botão hambúrguer (mobile) */}
@@ -61,9 +61,9 @@ export function Header() {
               {item.name}
             </a>
           ))}
-          <Button className="w-full" asChild>
+          <button className="w-full" >
             <a href="#comecar">Começar</a>
-          </Button>
+          </button>
         </div>
       )}
     </header>
