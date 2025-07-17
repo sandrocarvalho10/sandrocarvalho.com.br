@@ -15,8 +15,8 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full fixed top-0 z-50 bg-background shadow-sm">
-      <div className="mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+    <header className="w-full mx-auto fixed top-0 z-50 bg-background shadow-sm ">
+      <div className="mx-auto max-w-xl px-4 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="text-xl font-bold text-primary">MinhaMarca</div>
 
