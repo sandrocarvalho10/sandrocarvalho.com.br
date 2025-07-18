@@ -5,7 +5,7 @@ function CardHeader() {
 
     return (
         <div className="w-full flex items-center justify-between">
-            <div className="flex gap-2 items-center ">
+            <div className="flex gap-4 items-center ">
 
                 <span className="rounded-full bg-amber-500 w-14 border-amber-700 aspect-square"></span>
                 <div className="text-sm font-light flex flex-col gap-0">
@@ -26,8 +26,8 @@ function CardHeader() {
 
 function CardContent() {
     return (
-        <div className="flex flex-col gap-2">
-            <h1 className="text-3xl font-light w-full max-w-[80%] leading-normal">Apaixonado por transformar ideias em interfaces eficientes.</h1>
+        <div className="flex flex-col gap-8">
+            <h1 className="text-5xl font-light w-full max-w-[90%] leading-16">Apaixonado por transformar ideias em interfaces eficientes.</h1>
             <p className="text-lg font-extralight leading-10 max-w-[60%]">Com mais de 5 anos de experiência em Front-End, encaro cada projeto como uma chance de aprender, evoluir e entregar valor através do código.
             </p>
         </div>
