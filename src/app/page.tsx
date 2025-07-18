@@ -1,3 +1,12 @@
+import { Header } from "@/screens/landingPage/header"
+import { Hero } from "@/screens/landingPage/hero"
+
 export default function Page() {
-  return <h1>Hello, Next.js!</h1>
+  return (
+    <div className="flex flex-col w-full px-4 h-screen">
+        <Header />
+        <Hero />
+
+    </div>
+  )
 }

@@ -1,5 +1,5 @@
+import '../styles/global.css'
 import { archivo } from "@/fonts/index"
-
 
 
 
@@ -9,7 +9,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={archivo.className}>
+    <html lang="pt-br" className={archivo.className}>
       <body>{children}</body>
     </html>
   )

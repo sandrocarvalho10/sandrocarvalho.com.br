@@ -1,32 +1,50 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
+/** @type {import('tailwindcss').Config} */
 
 module.exports = {
   content: [
-    './src/app/**/*.{js,ts,jsx,tsx}',
-    './src/components/**/*.{js,ts,jsx,tsx}',
+  './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
-      colors: {
-        background: '#0d0d16', // fundo escuro (quase preto)
-        card: '#1b1c22', // fundo de cards
-        textPrimary: '#ffffff', // texto branco
-        textSecondary: '#9ca3af', // cinza claro
-        amber: {
-          400: '#facc15', // dourado (semelhante ao da imagem)
-          500: '#eab308', // um pouco mais escuro
+      animation: {
+        'rotate-bg': 'rotateBg 4s linear infinite',
+      },
+      keyframes: {
+        rotateBg: {
+          '0%': { transform: 'translate(-50%, -50%) rotate(0deg)' },
+          '100%': { transform: 'translate(-50%, -50%) rotate(360deg)' },
         },
       },
-      borderRadius: {
-        xl: '1.5rem',
-      },
-      fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
-      },
-      boxShadow: {
-        'card-glow': '0 0 30px rgba(250, 204, 21, 0.1)',
+      colors: {
+        background: '#0D0D0D',
+        foreground: '#EAEAEA',
+        muted: {
+          DEFAULT: '#9CA3AF',
+          foreground: '#6B7280',
+        },
+        border: '#1F2937',
+        input: '#1F2937',
+        ring: '#4ADE80',
+        primary: {
+          DEFAULT: '#4ADE80',
+          foreground: '#0D0D0D',
+        },
+        secondary: {
+          DEFAULT: '#1F2937',
+          foreground: '#EAEAEA',
+        },
+        destructive: {
+          DEFAULT: '#EF4444',
+          foreground: '#FECACA',
+        },
+        accent: {
+          DEFAULT: '#374151',
+          foreground: '#EAEAEA',
+        },
       },
     },
   },
   plugins: [],
 };
+
+
