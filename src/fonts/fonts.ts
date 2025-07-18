@@ -14,5 +14,6 @@ export const roboto_mono = Roboto_Mono({
 export const archivo = Archivo({
   subsets: ['latin'],
   display: 'swap',
+  weight: ['100','200','300','400', '500', '600', '700']
 })
  
