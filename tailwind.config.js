@@ -2,13 +2,19 @@
 
 module.exports = {
   content: [
-    './src/app/**/*.{js,ts,jsx,tsx}',
-    './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/screens/**/*.{js,ts,jsx,tsx}',
-    './src/styles/**/*.{js,ts,jsx,tsx}',
+  './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
+      animation: {
+        'rotate-bg': 'rotateBg 4s linear infinite',
+      },
+      keyframes: {
+        rotateBg: {
+          '0%': { transform: 'translate(-50%, -50%) rotate(0deg)' },
+          '100%': { transform: 'translate(-50%, -50%) rotate(360deg)' },
+        },
+      },
       colors: {
         background: '#0D0D0D',
         foreground: '#EAEAEA',
