@@ -7,7 +7,13 @@ function CardHeader() {
         <div className="w-full flex items-center justify-between">
             <div className="flex gap-4 items-center ">
 
-                <span className="rounded-full bg-amber-500 w-14 border-amber-700 aspect-square"></span>
+                <span className="rounded-full bg-amber-500 w-14 border-amber-700 aspect-square">
+                    <img
+                        src="/avatar.png"
+                        alt="Avatar"
+                        className="w-full h-full object-cover rounded-full"
+                    />
+                </span>
                 <div className="text-sm font-light flex flex-col gap-0">
                     <span className="text-white opacity-60 font-medium text-lg">Olá, Eu sou Sandro.</span>
                     <span className="text-sm opacity-40">Front-End Developer</span>
