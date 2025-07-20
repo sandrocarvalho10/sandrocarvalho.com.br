@@ -1,6 +1,6 @@
 export function CardAnimatedAvatar() {
     return (
-        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg">
+        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg min-h-[400px]">
             {/* Radial blur com anéis concêntricos em tons de amarelo com centro na parte inferior */}
             <div className="absolute inset-0 z-0" style={{
                 background: 'radial-gradient(circle at 50% 100%, #FFD700 0%, #FFD700 20%, #FFC000 20%, #FFC000 40%, #FFAA00 40%, #FFAA00 60%, #FF8C00 60%, #FF8C00 80%, #FF6F00 80%, #FF6F00 100%)',
