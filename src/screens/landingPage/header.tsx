@@ -24,7 +24,7 @@ export function Header() {
             Sandro
           </span>
           <span className='font-extralight opacity-50'>
-            , Front-end_
+            , Developer_
           </span>
         </div>
 
