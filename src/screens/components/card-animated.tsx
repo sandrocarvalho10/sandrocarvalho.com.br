@@ -33,8 +33,8 @@ function CardHeader() {
 function CardContent() {
     return (
         <div className="flex flex-col gap-8">
-            <h1 className="text-5xl font-light w-full max-w-[90%] leading-16">Apaixonado por transformar ideias em interfaces eficientes.</h1>
-            <p className="text-lg font-extralight leading-10 max-w-[60%]">Com mais de 5 anos de experiência em Front-End, encaro cada projeto como uma chance de aprender, evoluir e entregar valor através do código.
+            <h1 className="text-5xl font-light w-full max-w-[90%] leading-16">Apaixonado por transformar ideias em projetos e interfaces eficientes.</h1>
+            <p className="text-lg font-extralight leading-10 max-w-[60%]">Com mais de 5 anos de experiência em Desenvolvimento Web, encaro cada projeto como uma chance de aprender, evoluir e entregar valor através do código.
             </p>
         </div>
     )
