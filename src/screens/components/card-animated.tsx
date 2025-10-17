@@ -4,7 +4,7 @@ import { Github, Instagram, Linkedin } from "lucide-react";
 function CardHeader() {
 
     return (
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between ">
             <div className="flex gap-4 items-center ">
 
                 <span className="rounded-full bg-amber-500 w-14 border-amber-700 aspect-square">
@@ -42,7 +42,7 @@ function CardContent() {
 
 export function CardAnimated() {
     return (
-        <div className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-12 rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg">
+        <div className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-12 rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg rounded-br-lg rounded-tr-[50px]">
         
 
 
