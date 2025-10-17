@@ -2,6 +2,7 @@ import { Footer } from "@/screens/components/footer"
 import { Content } from "@/screens/landingPage/content"
 import { Header } from "@/screens/landingPage/header"
 import { Hero } from "@/screens/landingPage/hero"
+
 import { Skills } from "@/screens/landingPage/skills"
 
 export default function Page() {
