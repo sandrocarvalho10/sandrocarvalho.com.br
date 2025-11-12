@@ -1,20 +1,20 @@
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import {  useRef } from "react";
+import { useRef } from "react";
 import * as THREE from "three";
 
 export function AvatarModel() {
   const group = useRef<THREE.Group>(null!);
-  const { scene } = useGLTF("/models/avatar_white.glb");
+  const { scene } = useGLTF("/models/Waving.glb");
 
 
 
   useFrame(() => {
     if (group.current) {
       group.current.rotation.y += 0.003;
-      
+
       const time = Date.now() * 0.001;
-      
+
       // Aplica sorriso usando os morph targets corretos
       scene.traverse((obj) => {
         if (obj.type === 'SkinnedMesh') {
@@ -25,7 +25,7 @@ export function AvatarModel() {
             if (smileIndex !== undefined) {
               mesh.morphTargetInfluences[smileIndex] = Math.sin(time * 0.5) * 0.4 + 0.6;
             }
-            
+
             // Abertura maior da boca para mostrar os dentes
             const openIndex = mesh.morphTargetDictionary['mouthOpen'];
             if (openIndex !== undefined) {
