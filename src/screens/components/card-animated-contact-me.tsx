@@ -20,9 +20,9 @@ export function CardAnimatedContactMe() {
             <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
                 <div className="absolute z-20 bottom-0 left-0 w-full">
                     <img
-                        src="/avatar.png"
+                        src="/avatar_contact.png"
                         alt="Background"
-                        className="w-[400px] object-cover absolute -right-14 bottom-0 opacity-90"
+                        className="w-[270px] object-cover absolute -right-4 -bottom-2 opacity-90"
                     // style={{ filter: 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.6))' }}
                     />
                 </div>
@@ -37,14 +37,14 @@ export function CardAnimatedContactMe() {
                     Entre em contato via e-mail ou linkedin
                 </div>
 
-                <div className="w-32 py-12 flex flex-col justify-center items-center ">
+                <div className="w-16 pt-24 flex flex-col justify-end items-end ">
 
-                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" className="p-3 border rounded-none hover:text-amber-400 transition-colors" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" className="p-3 border rounded-none hover:text-amber-400 transition-colors backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <LinkedinIcon className="hover:text-amber-400 transition-colors" />
                     </Link>
 
 
-                    <Link href="mailto:sandrocarvalho@outlook.com" className="p-3 border rounded-none hover:text-amber-400 transition-colors" target="_blank" rel="noopener noreferrer">
+                    <Link href="mailto:sandrocarvalho@outlook.com" className="p-3 border rounded-none hover:text-amber-400 transition-colors backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <Mail className="hover:text-amber-400 transition-colors" />
                     </Link>
 
