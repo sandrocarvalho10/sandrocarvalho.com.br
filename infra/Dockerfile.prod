@@ -1,0 +1,61 @@
+# =========================
+# 1️⃣ Base
+# =========================
+FROM node:20-alpine AS base
+WORKDIR /app
+
+# Evita problemas com dependências nativas
+RUN apk add --no-cache libc6-compat
+
+# =========================
+# 2️⃣ Dependencies
+# =========================
+FROM base AS deps
+
+COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
+
+# Detecta o gerenciador automaticamente
+RUN \
+  if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
+  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install --frozen-lockfile; \
+  else echo "Nenhum lockfile encontrado" && exit 1; \
+  fi
+
+# =========================
+# 3️⃣ Build
+# =========================
+FROM base AS builder
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN npm run build || yarn build || pnpm build
+
+# =========================
+# 4️⃣ Runner (produção)
+# =========================
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Usuário não-root (boa prática)
+RUN addgroup --system --gid 1001 nodejs \
+  && adduser --system --uid 1001 nextjs
+
+# Apenas o necessário para rodar
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["npm", "run", "start"]
