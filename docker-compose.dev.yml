@@ -6,11 +6,21 @@ services:
     build:
       context: .
       dockerfile: infra/Dockerfile.dev
-    ports:
-      - "3000:3000"
     volumes:
       - .:/app
       - /app/node_modules
     environment:
       NODE_ENV: development
+    expose:
+      - "3000"
     command: npm run dev
+
+  nginx:
+    container_name: nginx-local
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./infra/nginx.local.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - nextjs
