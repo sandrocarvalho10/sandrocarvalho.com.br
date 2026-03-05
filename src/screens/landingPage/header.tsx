@@ -6,10 +6,10 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const navigation = [
-  { name: 'Início', href: '#' },
-  { name: 'Sobre', href: '#sobre' },
-  { name: 'Serviços', href: '#servicos' },
-  { name: 'Contato', href: '#contato' },
+  // { name: 'Início', href: '#' },
+  // { name: 'Sobre', href: '#sobre' },
+  // { name: 'Skills', href: '#skills' },
+  // { name: 'Contato', href: '#contato' },
 ];
 
 export function Header() {
