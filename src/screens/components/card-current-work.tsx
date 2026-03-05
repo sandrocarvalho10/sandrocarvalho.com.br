@@ -37,7 +37,7 @@ export function CardCurrentWorkPortfolio() {
         <div className="relative w-full mx-auto overflow-hidden 
                         rounded-lg rounded-tr-[50px] rounded-br-[50px] 
                         p-12 border border-white/5 backdrop-blur-lg 
-                        min-h-[400px]
+                        min-h-[560px]
                         bg-gradient-to-br from-[#051824]/90 to-[#041e36]/95">
 
             {/* 🔥 Neon Glow Background */}
@@ -77,20 +77,25 @@ export function CardCurrentWorkPortfolio() {
                         <ArrowRight className="-rotate-45" />
                     </span>
                 </Link>
+                <p className="text-md font-extralight leading-8 opacity-80 mt-2">
+                    Ensaios, proteção, monitoramento, controle e gestão de ativos no setor elétrico.
+                </p>
             </div>
 
-            <div className="relative w-full flex items-center 
-                            mt-8 justify-center -mb-12 
-                            max-h-[350px] overflow-hidden ">
-                <Image
-                    src="/images/hvex/hvex_site.jpg"
-                    alt="HVEX"                    
-                    width={1457}
-                    height={4000}
-                    style={{ objectFit: 'cover', objectPosition:  'top'}}
-                />
-            </div>
-
+            
+                <div
+                    className="relative w-full h-full flex items-center 
+             mt-8 justify-center -mb-12 
+             max-h-[500px] overflow-hidden"
+                >
+                    <Image
+                        src="/images/hvex/hvex_site.jpg"
+                        alt="HVEX"
+                        fill
+                        className="w-full max-w-[460px] mx-auto object-cover object-top rounded-t-[2rem]" 
+                    />
+                </div>
+            
         </div>
     )
 }
