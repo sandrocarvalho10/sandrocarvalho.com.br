@@ -4,7 +4,7 @@ import Link from "next/link"
 
 export function CardCurrentWork() {
     return (
-        <div className="relative w-full mx-auto overflow-hidden rounded-lg rounded-tl-[50px] rounded-bl-[50px] 
+        <div className="relative w-full mx-auto overflow-hidden rounded-lg rounded-tl-[50px] rounded-tr-[50px] rounded-bl-[50px] 
                         p-12 border border-white/5 backdrop-blur-lg min-h-[400px]
                         bg-[url('/images/banner2k.avif')] bg-cover bg-[50%_50%]
                         bg-linear-to-br from-blue-900/40 to-blue-400/90">
@@ -35,12 +35,12 @@ export function CardCurrentWork() {
 export function CardCurrentWorkPortfolio() {
     return (
         <div className="relative w-full mx-auto overflow-hidden 
-                        rounded-lg rounded-tr-[50px] rounded-br-[50px] 
+                        rounded-lg rounded-tr-[50px] rounded-tl-[50px] rounded-br-[50px] 
                         p-12 border border-white/5 backdrop-blur-lg 
                         min-h-[560px]
                         bg-gradient-to-br from-[#051824]/90 to-[#041e36]/95">
 
-            {/* 🔥 Neon Glow Background */}
+   
             <div className="absolute inset-0 -z-10">
                 <div className="absolute -top-24 -left-24 w-[350px] h-[350px] 
                                 bg-cyan-500/30 blur-[120px] rounded-full"></div>

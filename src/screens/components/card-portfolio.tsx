@@ -8,7 +8,7 @@ export function CardPortfolio({
     alt = "Background"
 }: ICardPortfolioProps) {
     return (
-        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg min-h-[300px] aspect-video">
+        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg md:min-h-[300px] xs:min-h-[150px] xs:rounded-sm aspect-video">
             {/* Radial blur com anéis concêntricos em tons de azul com centro na parte inferior */}
             <div className="absolute inset-0 z-0" style={{
                 background: 'radial-gradient(circle at 50% 100%, #00BFFF 0%, #00BFFF 20%, #1E90FF 20%, #1E90FF 40%, #4169E1 40%, #4169E1 60%, #6495ED 60%, #6495ED 80%, #7B68EE 80%, #7B68EE 100%)',
