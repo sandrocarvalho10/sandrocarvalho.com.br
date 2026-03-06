@@ -3,8 +3,6 @@ import { About } from "@/screens/landingPage/about"
 import { Content } from "@/screens/landingPage/content"
 import { CurrentWork } from "@/screens/landingPage/current-work"
 import { Header } from "@/screens/landingPage/header"
-import { Hero } from "@/screens/landingPage/hero"
-
 import { Skills } from "@/screens/landingPage/skills"
 
 export default function Page() {
