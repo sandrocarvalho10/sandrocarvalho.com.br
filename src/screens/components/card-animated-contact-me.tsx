@@ -22,14 +22,13 @@ export function CardAnimatedContactMe() {
                     <img
                         src="/avatar_contact.png"
                         alt="Background"
-                        className="w-[270px] object-cover absolute -right-4 -bottom-2 opacity-90"
-                    // style={{ filter: 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.6))' }}
+                        className="w-[180px] md:w-[270px] object-cover absolute -right-4 -bottom-2 opacity-90"
                     />
                 </div>
             </div>
 
             {/* Conteúdo */}
-            <div className="relative z-30 pt-4 pl-4  w-full max-w-[80%]">
+            <div className="relative z-30 pt-4 pl-4 w-full max-w-[80%] md:max-w-[80%]">
                 <h2 className="text-3xl font-medium text-white mb-8">
                     Contate-me
                 </h2>
@@ -37,7 +36,7 @@ export function CardAnimatedContactMe() {
                     Entre em contato via e-mail ou linkedin
                 </div>
 
-                <div className="w-16 pt-24 flex flex-col justify-end items-end ">
+                <div className="w-16 pt-8 md:pt-24 flex flex-col justify-end items-end ">
 
                     <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] transition-colors backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <LinkedinIcon className="group-hover:fill-white transition-colors" />

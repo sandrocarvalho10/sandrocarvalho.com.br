@@ -40,8 +40,8 @@ function CardHeader() {
 function CardContent() {
     return (
         <div className="flex flex-col gap-8">
-            <h1 className="text-5xl font-light w-full max-w-[90%] leading-16">Apaixonado por transformar ideias em projetos e interfaces eficientes.</h1>
-            <p className="text-lg font-extralight leading-10 max-w-[60%]">Com mais de 5 anos de experiência em Desenvolvimento Web, encaro cada projeto como uma chance de aprender, evoluir e entregar valor através do código.
+            <h1 className="text-3xl md:text-5xl font-light w-full max-w-full md:max-w-[90%] leading-tight md:leading-16">Apaixonado por transformar ideias em projetos e interfaces eficientes.</h1>
+            <p className="text-base md:text-lg font-extralight leading-8 md:leading-10 max-w-full md:max-w-[60%]">Com mais de 5 anos de experiência em Desenvolvimento Web, encaro cada projeto como uma chance de aprender, evoluir e entregar valor através do código.
             </p>
         </div>
     )
@@ -49,7 +49,7 @@ function CardContent() {
 
 export function CardAnimated() {
     return (
-        <div className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-12 rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg rounded-br-lg rounded-tr-[50px]">
+        <div className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-12 rounded-[2rem] bg-[#131311] p-6 md:p-12 border border-white/5 backdrop-blur-lg rounded-br-lg rounded-tr-[50px]">
             {/* Background animado */}
             <div className="absolute left-1/2 top-1/2 z-0 h-[1010px] w-[1010px] -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform">
                 <div className="w-full animate-rotate-bg">
