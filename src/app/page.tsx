@@ -7,7 +7,7 @@ import { Skills } from "@/screens/landingPage/skills"
 
 export default function Page() {
   return (
-    <main className="flex flex-col w-full px-4 h-screen gap-8 pb-8">
+    <main className="flex flex-col w-full px-4 min-h-screen gap-8 pb-8">
       <Header />
       <About />
       <CurrentWork />
