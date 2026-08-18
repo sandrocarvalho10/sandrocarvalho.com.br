@@ -1,3 +1,5 @@
+import { AnimatedCard } from "./animated-card";
+
 function CardHeader() {
 
     return (
@@ -23,13 +25,14 @@ function CardContent() {
 
 export function CardSkills() {
     return (
-        <div className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-4 rounded-[2rem] bg-[#131311] p-6 md:p-12 border border-white/5 backdrop-blur-lg rounded-tr-lg rounded-bl-[50px]">
-
-
+        <AnimatedCard
+            glowColor="74, 222, 128"
+            className="relative w-full h-full max-w-5xl overflow-hidden flex flex-col gap-4 rounded-[2rem] bg-[#131311] p-6 md:p-12 border border-white/5 backdrop-blur-lg rounded-tr-lg rounded-bl-[50px]"
+        >
 
             {/* Background animado */}
             <div className="absolute left-1/2 top-1/2 z-0 h-[1010px] w-[1010px] -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform">
-                <div className="w-full animate-rotate-bg">
+                <div className="w-full animate-rotate-bg transition-[animation-duration] duration-500 group-hover/card:[animation-duration:1.6s]">
                     <img
                         src="/card-skills-bg.png"
                         alt="Background"
@@ -40,7 +43,7 @@ export function CardSkills() {
 
             <CardHeader />
             <CardContent />
-        </div>
+        </AnimatedCard>
 
     )
 }
