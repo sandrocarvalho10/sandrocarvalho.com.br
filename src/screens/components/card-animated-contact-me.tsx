@@ -1,9 +1,40 @@
+'use client';
+
+import gsap from "gsap";
 import { LinkedinIcon, Mail } from "lucide-react";
 import Link from "next/link";
+import { useLayoutEffect, useRef } from "react";
+import { AnimatedCard } from "./animated-card";
 
 export function CardAnimatedContactMe() {
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useLayoutEffect(() => {
+        const el = imgRef.current;
+        if (!el) return;
+
+        const ctx = gsap.context(() => {
+            gsap.fromTo(
+                el,
+                { y: -6 },
+                {
+                    y: -14,
+                    duration: 3,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                }
+            );
+        }, imgRef);
+
+        return () => ctx.revert();
+    }, []);
+
     return (
-        <div className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] rounded-tl-lg rounded-tr-[50px] bg-linear-to-br from-orange-600/70 to-amber-400/70  p-4 border border-white/5 backdrop-blur-lg min-h-[400px]">
+        <AnimatedCard
+            glowColor="251, 146, 60"
+            className="relative w-full h-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] rounded-tl-lg rounded-tr-[50px] bg-linear-to-br from-orange-600/70 to-amber-400/70  p-4 border border-white/5 backdrop-blur-lg min-h-[400px]"
+        >
             {/* Radial blur com anéis concêntricos em tons de amarelo com centro na parte inferior */}
             {/* <div className="absolute inset-0 z-0" style={{
                 background: 'radial-gradient(circle at 50% 100%, #FFD700 0%, #FFD700 20%, #FFC000 20%, #FFC000 40%, #FFAA00 40%, #FFAA00 60%, #FF8C00 60%, #FF8C00 80%, #FF6F00 80%, #FF6F00 100%)',
@@ -20,9 +51,10 @@ export function CardAnimatedContactMe() {
             <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
                 <div className="absolute z-20 bottom-0 left-0 w-full">
                     <img
+                        ref={imgRef}
                         src="/avatar_contact.png"
                         alt="Background"
-                        className="w-[180px] md:w-[270px] object-cover absolute -right-4 -bottom-2 opacity-90"
+                        className="w-[180px] md:w-[270px] object-cover absolute -right-4 -bottom-10 opacity-90 will-change-transform"
                     />
                 </div>
             </div>
@@ -38,19 +70,19 @@ export function CardAnimatedContactMe() {
 
                 <div className="w-16 pt-8 md:pt-24 flex flex-col justify-end items-end ">
 
-                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] transition-colors backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <LinkedinIcon className="group-hover:fill-white transition-colors" />
                     </Link>
 
 
-                    <Link href="mailto:sandro.luiz97@outlook.com" className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white transition-colors backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
-                        <Mail  />
+                    <Link href="mailto:sandro.luiz97@outlook.com" className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
+                        <Mail />
                     </Link>
 
                 </div>
             </div>
 
-        </div>
+        </AnimatedCard>
 
     )
 }
