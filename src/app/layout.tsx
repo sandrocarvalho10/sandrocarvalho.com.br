@@ -1,6 +1,7 @@
 import { Metadata, Viewport } from 'next'
 import '../styles/global.css'
 import { archivo } from "@/fonts/index"
+import { ParticleBackground } from "@/screens/components/particle-background"
 
 export const metadata: Metadata = {
   title: 'Sandro Carvalho — Developer',
@@ -38,7 +39,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" className={archivo.className}>
-      <body>{children}</body>
+      <body>
+        <ParticleBackground />
+        {children}
+      </body>
     </html>
   )
 }
