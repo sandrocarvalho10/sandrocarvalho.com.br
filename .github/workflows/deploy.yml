@@ -1,0 +1,62 @@
+name: Deploy Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # =========================
+      # 1️⃣ Checkout do código
+      # =========================
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # =========================
+      # 2️⃣ Login no GitHub Container Registry (GHCR)
+      # =========================
+      - name: Login to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+      # =========================
+      # 3️⃣ Build da imagem Docker
+      # =========================
+      - name: Build Docker image
+        run: |
+          docker build \
+            -f infra/Dockerfile.prod \
+            -t ghcr.io/${{ github.repository_owner }}/nextjs-app:latest \
+            .
+
+      # =========================
+      # 4️⃣ Push da imagem para o GHCR
+      # =========================
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository_owner }}/nextjs-app:latest
+
+      # =========================
+      # 5️⃣ Deploy no servidor via SSH
+      # =========================
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22
+          timeout: 30s
+          command_timeout: 10m
+          script: |
+            cd /srv/app
+            docker compose pull
+            docker compose up -d

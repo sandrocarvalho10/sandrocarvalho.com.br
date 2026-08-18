@@ -1,15 +1,15 @@
 'use client';
 
 
-import { Menu, X } from 'lucide-react';
+import { Globe, Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
 const navigation = [
-  { name: 'Início', href: '#' },
-  { name: 'Sobre', href: '#sobre' },
-  { name: 'Serviços', href: '#servicos' },
-  { name: 'Contato', href: '#contato' },
+  // { name: 'Início', href: '#' },
+  // { name: 'Sobre', href: '#sobre' },
+  // { name: 'Skills', href: '#skills' },
+  // { name: 'Contato', href: '#contato' },
 ];
 
 export function Header() {
@@ -39,6 +39,9 @@ export function Header() {
               {item.name}
             </a>
           ))}
+          <span className='text-muted opacity-40 hover:text-white hover:opacity-70 transition-colors hover:cursor-pointer '>
+            <Globe className="inline-block w-6 h-6" />
+          </span>
         </nav>
 
         {/* Botão de ação */}

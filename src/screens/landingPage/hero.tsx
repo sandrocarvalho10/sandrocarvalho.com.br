@@ -29,6 +29,13 @@ export function Hero() {
 
     return (
         <section className="w-full grid grid-cols-2 place-items-center h-full min-h-[600px]">
+
+            <div className="w-full h-full flex flex-col justify-center items-center gap-4">
+                <h1 className="bg-linear-to-r from-orange-500 to-yellow-500 bg-clip-text text-5xl font-extrabold text-transparent uppercase">Sandro Carvalho</h1>
+                <p className="text-lg text-black">Full Stack Developer</p>
+            </div>
+            <div className="w-full h-full flex justify-center items-center bg-radial-[at_50%_70%] from-yellow-500/80 via-orange-500/10 to-transparent to-70%">
+
             <Canvas camera={{ position: [0, 0, 1.2], fov: 45, rotation: [0, 0, 0]}} >
                 <ambientLight intensity={1} />
                 <directionalLight position={[3, 3, 3]} intensity={6} />
@@ -37,10 +44,6 @@ export function Hero() {
                 </Suspense>
                 <OrbitControls enableZoom={false} />
             </Canvas>
-
-            <div className="w-full h-full flex flex-col justify-center items-center gap-4">
-                <h1 className="text-4xl font-bold text-white">Sandro Carvalho</h1>
-                <p className="text-lg text-white">Full Stack Developer</p>
             </div>
 
         </section>
