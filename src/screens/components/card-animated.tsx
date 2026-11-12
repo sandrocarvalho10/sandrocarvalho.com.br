@@ -1,4 +1,5 @@
 import { GithubIcon, LinkedinIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatedCard } from "./animated-card";
 
@@ -9,9 +10,11 @@ function CardHeader() {
         <div className="w-full flex items-center justify-between ">
             <div className="flex gap-4 items-center">
                 <span className="rounded-full bg-amber-500 w-14 border-amber-700 aspect-square">
-                    <img
+                    <Image
                         src="/avatar.png"
-                        alt="Avatar"
+                        alt="Foto de Sandro Carvalho"
+                        width={56}
+                        height={56}
                         className="w-full h-full object-cover rounded-full"
                     />
                 </span>
@@ -23,11 +26,13 @@ function CardHeader() {
             </div>
             <div className="flex gap-3 items-center">
                 <Link href="https://linkedin.com/in/sandro-carvalho-dev"
-                    className="cursor-pointer group p-2 rounded-md hover:bg-[#0a66c2] trasnsition-all duration-200 ease-in"
-                    target="_blank">
+                    aria-label="LinkedIn de Sandro Carvalho"
+                    className="cursor-pointer group p-2 rounded-md hover:bg-[#0a66c2] transition-all duration-200 ease-in"
+                    target="_blank" rel="noopener noreferrer">
                     <LinkedinIcon className="group-hover:fill-white" />
                 </Link>
-                <Link href="https://github.com/sandrocarvalho10" target="_blank"
+                <Link href="https://github.com/sandrocarvalho10" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub de Sandro Carvalho"
                     className="cursor-pointer group p-2 rounded-full hover:bg-black duration-200 ease-in"
                 >
                     <GithubIcon className="group-hover:fill-white duration-200 ease-in" />
@@ -52,14 +57,18 @@ export function CardAnimated() {
     return (
         <AnimatedCard
             glowColor="245, 179, 76"
-            className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-12 rounded-[2rem] bg-[#131311] p-6 md:p-12 border border-white/5 backdrop-blur-lg rounded-br-lg rounded-tr-[50px]"
+            aboveTheFold
+            className="relative w-full max-w-5xl overflow-hidden h-auto flex flex-col gap-12 isolate rounded-[2rem] bg-[#131311] p-6 md:p-12 border border-white/5 rounded-br-lg rounded-tr-[50px]"
         >
             {/* Background animado */}
             <div className="absolute left-1/2 top-1/2 z-0 h-[1010px] w-[1010px] -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform">
-                <div className="w-full animate-rotate-bg transition-[animation-duration] duration-500 group-hover/card:[animation-duration:1.6s]">
-                    <img
+                <div className="w-full h-full animate-rotate-bg transition-[animation-duration] duration-500 group-hover/card:[animation-duration:1.6s]">
+                    <Image
                         src="/card-background.png"
-                        alt="Background"
+                        alt=""
+                        width={1010}
+                        height={1010}
+                        sizes="1010px"
                         className="w-full h-full object-cover opacity-60"
                     />
                 </div>

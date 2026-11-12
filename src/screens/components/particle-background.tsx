@@ -13,6 +13,8 @@ interface Particle {
 const COLORS = [0xf5b34c, 0x4ade80, 0x60a5fa];
 const LINK_DISTANCE = 130;
 const MOUSE_RADIUS = 160;
+const LINK_DISTANCE_SQ = LINK_DISTANCE * LINK_DISTANCE;
+const MOUSE_RADIUS_SQ = MOUSE_RADIUS * MOUSE_RADIUS;
 
 export function ParticleBackground() {
     const hostRef = useRef<HTMLDivElement>(null);
@@ -27,7 +29,20 @@ export function ParticleBackground() {
         let onPointerMove: ((e: PointerEvent) => void) | null = null;
         let onVisibility: (() => void) | null = null;
 
+        // Espera o navegador ficar ocioso: o Pixi (~WebGL + chunk grande) não
+        // compete com o primeiro paint nem com a hidratação.
+        const whenIdle = () =>
+            new Promise<void>((resolve) => {
+                if ("requestIdleCallback" in window) {
+                    window.requestIdleCallback(() => resolve(), { timeout: 2000 });
+                } else {
+                    setTimeout(resolve, 300);
+                }
+            });
+
         (async () => {
+            await whenIdle();
+            if (destroyed) return;
             const PIXI = await import("pixi.js");
             if (destroyed || !hostRef.current) return;
 
@@ -103,8 +118,9 @@ export function ParticleBackground() {
                     if (mouse.active) {
                         const dx = p.x - mouse.x;
                         const dy = p.y - mouse.y;
-                        const dist = Math.hypot(dx, dy);
-                        if (dist < MOUSE_RADIUS && dist > 0.001) {
+                        const distSq = dx * dx + dy * dy;
+                        if (distSq < MOUSE_RADIUS_SQ && distSq > 0.000001) {
+                            const dist = Math.sqrt(distSq);
                             const force = (1 - dist / MOUSE_RADIUS) * 0.6;
                             p.x += (dx / dist) * force;
                             p.y += (dy / dist) * force;
@@ -125,8 +141,12 @@ export function ParticleBackground() {
                     for (let j = i + 1; j < particles.length; j++) {
                         const a = particles[i];
                         const b = particles[j];
-                        const dist = Math.hypot(a.x - b.x, a.y - b.y);
-                        if (dist < LINK_DISTANCE) {
+                        const dx = a.x - b.x;
+                        const dy = a.y - b.y;
+                        const distSq = dx * dx + dy * dy;
+                        // Maioria dos pares descartada sem raiz quadrada
+                        if (distSq < LINK_DISTANCE_SQ) {
+                            const dist = Math.sqrt(distSq);
                             const alpha = (1 - dist / LINK_DISTANCE) * 0.12;
                             linkLayer
                                 .moveTo(a.x, a.y)

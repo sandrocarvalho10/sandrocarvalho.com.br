@@ -1,19 +1,10 @@
-import { Inter, Roboto_Mono, Archivo } from 'next/font/google'
- 
-export const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-})
- 
-export const roboto_mono = Roboto_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-})
+import { Archivo } from 'next/font/google'
 
- 
+// Fonte única do site. Inter e Roboto Mono foram removidas: eram baixadas
+// (preload) em toda visita, mas nenhum elemento as usava.
 export const archivo = Archivo({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['100','200','300','400', '500', '600', '700']
+  weight: ['100', '200', '300', '400', '500', '600', '700'],
+  variable: '--font-archivo',
 })
- 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AnimatedCard } from "./animated-card";
 
 interface  ICardPortfolioProps {
@@ -7,12 +8,15 @@ interface  ICardPortfolioProps {
 
 export function CardPortfolio({
     src = "/juninhopersonal.png",
-    alt = "Background"
+    alt = "Screenshot de projeto do portfólio"
 }: ICardPortfolioProps) {
+    // next/image exige caminho absoluto para arquivos de /public
+    const imageSrc = src.startsWith("/") ? src : `/${src}`;
+
     return (
         <AnimatedCard
             glowColor="56, 189, 248"
-            className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg md:min-h-[300px] xs:min-h-[150px] xs:rounded-sm aspect-video"
+            className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 md:min-h-[300px] aspect-video"
         >
             {/* Radial blur com anéis concêntricos em tons de azul com centro na parte inferior */}
             <div className="absolute inset-0 z-0" style={{
@@ -29,10 +33,12 @@ export function CardPortfolio({
             {/* Background animado */}
             <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
                 <div className="absolute z-20 inset-0 transition-transform duration-700 ease-out group-hover/card:scale-105">
-                    <img
-                        src={src}
+                    <Image
+                        src={imageSrc}
                         alt={alt}
-                        className="w-full h-full object-cover opacity-90"
+                        fill
+                        sizes="(min-width: 1280px) 624px, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover opacity-90"
                         style={{ filter: 'drop-shadow(0 0 15px rgba(0, 191, 255, 0.6))' }}
                     />
                 </div>

@@ -2,6 +2,7 @@
 
 import gsap from "gsap";
 import { LinkedinIcon, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { AnimatedCard } from "./animated-card";
@@ -50,11 +51,14 @@ export function CardAnimatedContactMe() {
             {/* Background animado */}
             <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
                 <div className="absolute z-20 bottom-0 left-0 w-full">
-                    <img
+                    <Image
                         ref={imgRef}
                         src="/avatar_contact.png"
-                        alt="Background"
-                        className="w-[180px] md:w-[270px] object-cover absolute -right-4 -bottom-10 opacity-90 will-change-transform"
+                        alt=""
+                        width={357}
+                        height={357}
+                        sizes="(min-width: 768px) 270px, 180px"
+                        className="w-[180px] md:w-[270px] h-auto object-cover absolute -right-4 -bottom-10 opacity-90 will-change-transform"
                     />
                 </div>
             </div>
@@ -70,12 +74,12 @@ export function CardAnimatedContactMe() {
 
                 <div className="w-16 pt-8 md:pt-24 flex flex-col justify-end items-end ">
 
-                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" aria-label="LinkedIn de Sandro Carvalho" className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <LinkedinIcon className="group-hover:fill-white transition-colors" />
                     </Link>
 
 
-                    <Link href="mailto:sandro.luiz97@outlook.com" className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
+                    <Link href="mailto:sandro.luiz97@outlook.com" aria-label="Enviar e-mail para Sandro Carvalho" className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <Mail />
                     </Link>
 

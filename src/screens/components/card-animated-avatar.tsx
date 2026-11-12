@@ -1,6 +1,7 @@
 'use client';
 
 import gsap from "gsap";
+import Image from "next/image";
 import { useLayoutEffect, useRef } from "react";
 import { AnimatedCard } from "./animated-card";
 
@@ -31,7 +32,8 @@ export function CardAnimatedAvatar() {
     return (
         <AnimatedCard
             glowColor="255, 200, 40"
-            className="relative w-full h-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 backdrop-blur-lg min-h-[400px] rounded-bl-lg  rounded-tl-[50px] rounded-br-[50px]"
+            aboveTheFold
+            className="relative w-full h-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 min-h-[400px] rounded-bl-lg  rounded-tl-[50px] rounded-br-[50px]"
         >
             {/* Radial blur com anéis concêntricos em tons de amarelo com centro na parte inferior */}
             <div className="absolute inset-0 z-0" style={{
@@ -48,10 +50,14 @@ export function CardAnimatedAvatar() {
             {/* Background animado */}
             <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden">
                 <div ref={imgRef} className="absolute z-20 -bottom-10 left-0 w-full will-change-transform">
-                    <img
+                    <Image
                         src="/avatar1.png"
-                        alt="Background"
-                        className="w-full object-contain opacity-90"
+                        alt="Ilustração de Sandro Carvalho"
+                        width={1080}
+                        height={1080}
+                        sizes="(min-width: 768px) 320px, 100vw"
+                        preload
+                        className="w-full h-auto object-contain opacity-90"
                         style={{ filter: 'drop-shadow(0 0 15px rgba(255, 215, 0, 0.6))' }}
                     />
                 </div>

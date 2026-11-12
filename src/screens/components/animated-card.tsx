@@ -15,6 +15,11 @@ interface AnimatedCardProps extends React.HTMLAttributes<HTMLDivElement> {
   glowColor?: string;
   /** Intensidade do tilt 3D em graus */
   tiltStrength?: number;
+  /**
+   * Cards acima da dobra: entrada via CSS (roda no primeiro paint, sem esperar
+   * a hidratação), para não atrasar o LCP. Os demais usam ScrollTrigger.
+   */
+  aboveTheFold?: boolean;
 }
 
 export function AnimatedCard({
@@ -22,6 +27,7 @@ export function AnimatedCard({
   className,
   glowColor = "255, 255, 255",
   tiltStrength = 4,
+  aboveTheFold = false,
   style,
   ...props
 }: AnimatedCardProps) {
@@ -34,7 +40,7 @@ export function AnimatedCard({
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
+      if (!aboveTheFold) gsap.fromTo(
         el,
         { opacity: 0, y: 32, scale: 0.98 },
         {
@@ -56,7 +62,7 @@ export function AnimatedCard({
     }, cardRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [aboveTheFold]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const el = cardRef.current;
@@ -87,7 +93,8 @@ export function AnimatedCard({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          "group/card [transform-style:preserve-3d] will-change-transform opacity-0",
+          "group/card [transform-style:preserve-3d] will-change-transform",
+          aboveTheFold ? "animate-card-in motion-reduce:animate-none" : "opacity-0",
           className
         )}
         style={{ "--glow-color": glowColor, ...style } as React.CSSProperties}

@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="pt-br" className={archivo.className}>
+    <html lang="pt-br" className={`${archivo.variable} ${archivo.className}`}>
       <body>
         <ParticleBackground />
         {children}

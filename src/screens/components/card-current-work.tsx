@@ -5,7 +5,7 @@ import Link from "next/link"
 export function CardCurrentWork() {
     return (
         <div className="relative w-full mx-auto overflow-hidden rounded-lg rounded-tl-[50px] rounded-tr-[50px] rounded-bl-[50px] 
-                        p-6 md:p-12 border border-white/5 backdrop-blur-lg min-h-[400px]
+                        isolate p-6 md:p-12 border border-white/5 min-h-[400px]
                         bg-[url('/images/banner2k.avif')] bg-cover bg-[50%_50%]
                         bg-linear-to-br from-blue-900/40 to-blue-400/90">
             <div className="w-full mb-32">
@@ -62,6 +62,7 @@ export function CardCurrentWorkPortfolio() {
                 <Link
                     href="https://hvex.com.br"
                     target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center text-4xl font-light 
                                w-full max-w-[80%] leading-12 whitespace-nowrap
                                opacity-80 transition-all duration-300
@@ -90,8 +91,9 @@ export function CardCurrentWorkPortfolio() {
                 >
                     <Image
                         src="/images/hvex/hvex_site.jpg"
-                        alt="HVEX"
+                        alt="Screenshot do site da HVEX"
                         fill
+                        sizes="(min-width: 768px) 460px, 100vw"
                         className="w-full max-w-[460px] mx-auto object-cover object-top rounded-t-[2rem]" 
                     />
                 </div>
