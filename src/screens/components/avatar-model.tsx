@@ -14,8 +14,8 @@ export function AvatarModel() {
       const time = Date.now() * 0.001;
       
       scene.traverse((obj) => {
-        if (obj.type === 'SkinnedMesh') {
-          const mesh = obj as THREE.SkinnedMesh;
+        if (obj instanceof THREE.SkinnedMesh) {
+          const mesh = obj;
           if (mesh.morphTargetDictionary && mesh.morphTargetInfluences) {
             
             const smileIndex = mesh.morphTargetDictionary['mouthSmile'];
