@@ -11,10 +11,13 @@ Portfólio pessoal de Sandro Carvalho, feito em Next.js e publicado em https://s
 
 ## Início rápido
 
+Gerenciador de pacotes: **pnpm** (versão fixada em `packageManager` no `package.json`; use `corepack enable` para ativá-la).
+
 ```bash
-yarn install
-yarn dev          # http://localhost:3000 (Turbopack)
-yarn build && yarn start
+pnpm install
+pnpm dev          # http://localhost:3000 (Turbopack)
+pnpm build && pnpm start
+pnpm audit        # checar vulnerabilidades antes de abrir PR
 ```
 
 Ou com Docker e Nginx (http://localhost):
@@ -29,3 +32,4 @@ docker compose -f docker-compose.dev.yml up --build
 - Commits: prefixo no estilo Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`).
 - Branches: `feat/*`, `fix/*` a partir de `main`; o push em `main` faz deploy em produção.
 - Alias de import: `@/*` → `src/*`.
+- Só existe um lockfile (`pnpm-lock.yaml`). Não commitar `yarn.lock` nem `package-lock.json`: o Dockerfile dá preferência a eles e a produção acabaria instalando versões diferentes das do dev.

@@ -69,7 +69,7 @@ Mesmos anéis concêntricos do card Avatar, brilho `rgba(0,191,255,.4)`.
 
 ### 2.2 Tipografia
 
-- **Família:** Archivo (Google Fonts via `next/font`), pesos 100–700. Inter e Roboto Mono estão carregadas mas não são usadas.
+- **Família:** Archivo (Google Fonts via `next/font`), pesos 100–700, exposta como `--font-archivo` / `font-sans`. É a única fonte do site.
 - **Escala usada:**
 
 | Papel | Mobile | Desktop | Peso | Line-height |
@@ -83,8 +83,6 @@ Mesmos anéis concêntricos do card Avatar, brilho `rgba(0,191,255,.4)`.
 
 - **Regra:** contraste por peso e opacidade, não por cor. Destaques dentro de frases usam `font-bold text-white` (ex.: "**HVEX**").
 - Largura de leitura limitada com `max-w-[60%]`–`[90%]` no desktop, `max-w-full` no mobile.
-
-> ⚠️ `body { font-family: sans-serif }` em `global.css` sobrescreve a Archivo aplicada no `<html>`. Ver §7.
 
 ### 2.3 Raios — o "card folha"
 
@@ -115,14 +113,29 @@ Botões de ícone: `rounded-md` (LinkedIn no About), `rounded-full` (GitHub, set
 
 | Efeito | Implementação |
 |---|---|
-| Vidro | `backdrop-blur-lg` em todos os cards |
-| Fundo girando | imagem 1010×1010 centralizada, `animate-rotate-bg` (4s linear infinite), opacidade 60% |
+| Partículas | Canvas Pixi.js fixo atrás da página (`ParticleBackground`): pontos âmbar/verde/azul ligados por linhas finas quando próximos, repelidos pelo cursor, opacidade 70% |
+| Entrada de card | Fade + subida de 32px + scale 0.98 → 1, 0.9s. Acima da dobra: CSS `animate-card-in`; abaixo: GSAP + ScrollTrigger (`top 88%`) |
+| Tilt 3D | `AnimatedCard`: rotação de até ±4° seguindo o cursor, `perspective: 1400px` |
+| Spotlight | Radial de 480px na cor `glowColor` do card (8% de alfa) seguindo o cursor + anel de borda no hover |
+| Float | Avatar e contato flutuam de 8 a 18px em `sine.inOut`, cerca de 3s, yoyo infinito (GSAP) |
+| Vidro | `backdrop-blur-lg` **só em cards translúcidos** (contato, HVEX), onde as partículas aparecem por trás. Em cards opacos não tem efeito: usar `isolate` |
+| Fundo girando | imagem 1010×1010 centralizada, `animate-rotate-bg` (4s linear infinite, acelera para 1,6s no hover), opacidade 60% |
 | Glow de imagem | `drop-shadow(0 0 15px rgba(255,215,0,.6))` (quente) / `rgba(0,191,255,.6)` (frio) |
 | Logo 3D | `perspective-[800px]` + `rotate-x-[65deg] rotate-z-[-15deg]`, opacidade 30% |
 | Hover de ícone | troca de `bg` para a cor da marca + `fill-white`, `duration-200 ease-in` |
 | Hover de link | `opacity-80 → 100`, `duration-300` |
 
-> ⚠️ `animate-rotate-bg` está definida só em `tailwind.config.js`, que o Tailwind v4 não lê sem `@config`. A animação provavelmente não roda. Ver §7.
+`animate-rotate-bg` fica no `@theme` do `global.css` e é desativada com `prefers-reduced-motion`.
+
+**Cor de glow por card** (`glowColor` do `AnimatedCard`, formato `"r, g, b"`):
+
+| Card | glowColor |
+|---|---|
+| About | `245, 179, 76` (âmbar) |
+| Avatar | `255, 200, 40` (dourado) |
+| Contato | `251, 146, 60` (laranja) |
+| Skills | `74, 222, 128` (verde) |
+| Portfólio | `56, 189, 248` (azul-céu) |
 
 ---
 
@@ -160,25 +173,32 @@ Ritmo de proporções: `3:1 → 4:5 → 1:1 → 3:1`. A alternância evita que a
 | `CardSkills` | `card-skills.tsx` | Aprendizado atual (curso.dev) | Neutro + fundo girando |
 | `CardAnimatedContactMe` | `card-animated-contact-me.tsx` | CTA de contato: LinkedIn + e-mail | Quente |
 | `Footer` | `screens/components/footer.tsx` | Créditos e ano | — |
+| `AnimatedCard` | `animated-card.tsx` | Wrapper de interação: entrada, tilt, spotlight. Props: `glowColor`, `tiltStrength`, `aboveTheFold` | — |
+| `ParticleBackground` | `particle-background.tsx` | Fundo de partículas em WebGL, montado no `layout.tsx` | — |
 | `Hero` *(não usado)* | `screens/landingPage/hero.tsx` | Avatar 3D (R3F) girando com morph de sorriso | Quente |
 
 ### Anatomia comum de um card
 
 ```
-<div relative overflow-hidden rounded-[2rem] + cantos folha
-     border border-white/5 backdrop-blur-lg p-6 md:p-12 min-h-[400px]>
+<AnimatedCard glowColor="r, g, b" [aboveTheFold]
+     className="relative overflow-hidden rounded-[2rem] + cantos folha
+                border border-white/5 p-6 md:p-12 min-h-[400px]
+                [backdrop-blur-lg só se o fundo for translúcido]">
   ├─ camada z-0   : gradiente / imagem de fundo
   ├─ camada z-1   : brilho overlay (mix-blend-overlay)
   ├─ camada z-20  : ilustração/screenshot (pointer-events-none)
-  └─ camada z-30  : conteúdo (texto, links)
-</div>
+  ├─ camada z-30  : conteúdo (texto, links)
+  └─ camada z-40  : spotlight + anel de borda (injetados pelo AnimatedCard)
+</AnimatedCard>
 ```
 
-Todo card novo deve seguir essa pilha de camadas.
+Todo card novo deve seguir essa pilha de camadas. Use `aboveTheFold` **somente** nos cards visíveis sem rolar a página (hoje, a linha About); assim eles aparecem sem esperar o JavaScript.
 
 ---
 
 ## 5. Imagem e mídia
+
+**Regra:** toda imagem usa `next/image`, nunca `<img>`. Com tamanho fixo, informe `width`/`height` do arquivo original; dentro de um container, use `fill` + `sizes` com a largura real exibida em cada breakpoint. Somente a imagem principal acima da dobra (`avatar1.png`) recebe `preload`. Imagens decorativas usam `alt=""`; as de conteúdo, um `alt` descritivo.
 
 - Ilustrações do avatar em PNG com fundo transparente, ancoradas no **rodapé** do card (`bottom-0`), saindo levemente da borda (`-right-4 -bottom-2`).
 - Screenshots de projeto: `object-cover object-top`, com `rounded-t-[2rem]` quando "saem" pela base do card (`-mb-12`).
@@ -190,10 +210,10 @@ Todo card novo deve seguir essa pilha de camadas.
 
 - Idioma `pt-br` no `<html>`.
 - Contraste: texto `#EAEAEA` sobre `#131311` passa AA; textos com `opacity-40` (legendas, ícones do header) **não passam** e devem ficar restritos a conteúdo decorativo.
-- Todo link externo usa `target="_blank"` + `rel="noopener noreferrer"` (faltando no About e no HVEX).
-- Botões só com ícone precisam de `aria-label`.
-- Imagens de conteúdo precisam de `alt` descritivo (hoje vários são `"Background"`); imagens decorativas usam `alt=""`.
-- Respeitar `prefers-reduced-motion` nas animações contínuas (fundo girando, avatar 3D).
+- Todo link externo usa `target="_blank"` + `rel="noopener noreferrer"`.
+- Botões e links só com ícone têm `aria-label` (falta no hambúrguer do header).
+- Imagens de conteúdo têm `alt` descritivo; imagens decorativas usam `alt=""`.
+- `prefers-reduced-motion`: as partículas ficam estáticas e a entrada CSS é desativada (`motion-reduce:animate-none`). Ainda falta nas animações GSAP (float e ScrollTrigger).
 
 ---
 
@@ -201,7 +221,7 @@ Todo card novo deve seguir essa pilha de camadas.
 
 1. **Tokens em dois lugares e no formato errado.** `global.css` declara `--background: 13 13 13` (formato de canais do Tailwind v3), que é cor inválida no v4; só funciona quando o SO está em modo escuro, porque aí o valor vira `#0a0a0a`. Em SO claro, o fundo pode ficar branco. → Migrar todos os tokens para `@theme` em hex/oklch e remover o `tailwind.config.js` (ou carregá-lo com `@config`).
 2. **`primary` verde órfão.** Trocar por laranja (`#FF8C00`) para casar com a identidade real e com o `msapplication-TileColor`.
-3. **Fonte sobrescrita.** Remover `font-family: sans-serif` do `body` e mapear `--font-sans` para a Archivo (`variable: '--font-archivo'`).
+3. ~~**Fonte sobrescrita.**~~ Resolvido: a Archivo é aplicada via `--font-archivo`.
 4. **`themeColor: #ffffff`** num site escuro: usar `#0D0D0D`.
 5. **Cores hardcoded repetidas** (`#131311`, gradientes radiais inline) → criar tokens `--color-surface`, `--gradient-warm`, `--gradient-cool`.
 6. **Card base.** A pilha de camadas (§4) se repete em 6 arquivos → extrair um `<Card variant="neutral|warm|cool|navy" corners="...">`.

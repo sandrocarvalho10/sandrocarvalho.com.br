@@ -22,7 +22,7 @@ GitHub Actions (deploy.yml)
 
 | Modo | Comando | URL |
 |---|---|---|
-| Node | `yarn dev` | http://localhost:3000 |
+| Node | `pnpm dev` | http://localhost:3000 |
 | Docker + Nginx | `docker compose -f docker-compose.dev.yml up --build` | http://localhost |
 
 `docker-compose.dev.yml` monta o código como volume (hot reload) e usa `infra/nginx.local.conf` como proxy na porta 80.
@@ -30,7 +30,7 @@ GitHub Actions (deploy.yml)
 ## Imagem de produção (`infra/Dockerfile.prod`)
 
 1. **base**: `node:20-alpine` + `libc6-compat`.
-2. **deps**: instala as dependências a partir do lockfile encontrado (yarn → npm → pnpm).
+2. **deps**: instala as dependências a partir do lockfile encontrado (yarn → npm → pnpm). O projeto usa só o `pnpm-lock.yaml`, e o `corepack` ativa a versão do campo `packageManager`.
 3. **builder**: `next build` com `NEXT_TELEMETRY_DISABLED=1`.
 4. **runner**: usuário não-root `nextjs` (uid 1001); copia `public`, `.next`, `node_modules` e `package.json`; roda `npm run start` na porta 3000.
 
@@ -63,6 +63,15 @@ docker compose exec nginx nginx -s reload
 | `SERVER_HOST` | IP/host do servidor |
 | `SERVER_USER` | usuário SSH |
 | `SERVER_SSH_KEY` | chave privada SSH |
+
+## Checklist de segurança antes do deploy
+
+```bash
+pnpm audit --prod     # dependências de runtime; nenhuma crítica/alta pode passar
+pnpm build
+```
+
+O Next.js é a dependência mais sensível (servidor exposto + Image Optimization). Manter na última versão patch da linha 16.x.
 
 ## Rollback
 
