@@ -119,7 +119,7 @@ Botões de ícone: `rounded-md` (LinkedIn no About), `rounded-full` (GitHub, set
 | Spotlight | Radial de 480px na cor `glowColor` do card (8% de alfa) seguindo o cursor + anel de borda no hover |
 | Float | Avatar e contato flutuam de 8 a 18px em `sine.inOut`, cerca de 3s, yoyo infinito (GSAP) |
 | Vidro | `backdrop-blur-lg` **só em cards translúcidos** (contato, HVEX), onde as partículas aparecem por trás. Em cards opacos não tem efeito: usar `isolate` |
-| Fundo girando | imagem 1010×1010 centralizada, `animate-rotate-bg` (4s linear infinite, acelera para 1,6s no hover), opacidade 60% |
+| Fundo girando | imagem 1010×1010 centralizada, `animate-rotate-bg` (40s por volta, linear, contínuo; sem mudança no hover, porque alterar `animation-duration` no meio faz a imagem pular), opacidade 60% |
 | Glow de imagem | `drop-shadow(0 0 15px rgba(255,215,0,.6))` (quente) / `rgba(0,191,255,.6)` (frio) |
 | Logo 3D | `perspective-[800px]` + `rotate-x-[65deg] rotate-z-[-15deg]`, opacidade 30% |
 | Hover de ícone | troca de `bg` para a cor da marca + `fill-white`, `duration-200 ease-in` |

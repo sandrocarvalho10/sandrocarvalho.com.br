@@ -33,7 +33,7 @@ export function CardSkills() {
 
             {/* Background animado */}
             <div className="absolute left-1/2 top-1/2 z-0 h-[1010px] w-[1010px] -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform">
-                <div className="w-full h-full animate-rotate-bg transition-[animation-duration] duration-500 group-hover/card:[animation-duration:1.6s]">
+                <div className="w-full h-full animate-rotate-bg">
                     <Image
                         src="/card-skills-bg.png"
                         alt=""

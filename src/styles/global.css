@@ -29,7 +29,7 @@
 @theme {
   /* Fundo girando dos cards About e Skills. Só rotação: o container externo
      já faz a centralização com -translate-1/2. */
-  --animate-rotate-bg: rotate-bg 4s linear infinite;
+  --animate-rotate-bg: rotate-bg 40s linear infinite;
 
   @keyframes rotate-bg {
     to {
