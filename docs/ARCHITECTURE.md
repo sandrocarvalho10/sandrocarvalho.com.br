@@ -30,6 +30,8 @@
 │   ├── images/                # banner, screenshots (hvex/)
 │   ├── models/                # .glb do avatar 3D
 │   ├── icon/                  # favicon
+│   ├── icons/tech.svg         # sprite dos ícones da stack (Simple Icons, CC0)
+│   ├── ascii/retrato.json     # dados do retrato ASCII (cols, rows, colors)
 │   └── *.png                  # avatares, fundos dos cards, screenshots do portfólio
 └── src/
     ├── app/
@@ -76,6 +78,8 @@ Regras que mantêm a página leve sem perder as animações:
 | Uma imagem com `preload` | Só a do LCP visual (`avatar1.png`) |
 | Pixi carrega por último | `requestIdleCallback` + `import("pixi.js")` dinâmico; o ticker para quando a aba fica oculta e respeita `prefers-reduced-motion` |
 | Loop de partículas sem raiz quadrada desnecessária | Compara distâncias ao quadrado; `Math.sqrt` só nos pares que viram linha |
+| Retrato ASCII em `<canvas>`, não no DOM | ~5.300 glifos num único elemento; só desenha durante a transição (parado = 0 frames). Dados em `public/ascii/retrato.json`, pré-carregados com `preload()` do React |
+| Slider sem JavaScript | `TechMarquee` é Server Component (HTML + CSS); ícones vêm de um sprite SVG cacheável (`public/icons/tech.svg`) via `<use>`, fora do bundle |
 | `backdrop-blur` só onde aparece | Apenas em cards translúcidos (contato, HVEX). Em cards opacos usar `isolate` no lugar |
 
 Resultado medido (imagens da home): **8,2 MB → ~196 KB**.
@@ -92,3 +96,18 @@ Resultado medido (imagens da home): **8,2 MB → ~196 KB**.
 - Animações (`animate-rotate-bg`, `animate-card-in`) ficam no `@theme` do `global.css`.
 - `tailwind.config.js` existe, mas **não é carregado** (falta `@config` no CSS), então as cores que ele define ficam sem efeito. Não adicione nada nele; use o `@theme`. Ver [ANALISE.md](./ANALISE.md).
 - Detalhes visuais em [DESIGN.md](./DESIGN.md).
+
+## Idiomas (pt / en / es)
+
+- Rotas em `src/app/[lang]/` (home e `curriculo`), geradas estaticamente para os 3 idiomas.
+- Português não tem prefixo: `src/proxy.ts` reescreve `/` e `/curriculo` para `/pt/...` por dentro e redireciona `/pt/...` para a URL sem prefixo. Inglês e espanhol usam `/en` e `/es`.
+- Textos em `src/i18n/dictionaries/{pt,en,es}.ts`; o tipo `Dictionary` vem do `pt.ts`, então faltar uma chave em `en`/`es` quebra o build.
+- Dados do currículo que não mudam com o idioma (contatos, datas, stacks) ficam em `src/i18n/resume-data.ts`.
+- Seletor de idioma (globo no header) mantém o usuário na mesma página.
+
+## Currículo
+
+- **Versão interativa**: `src/screens/resume/resume.tsx` (cards, timeline com GSAP, contadores).
+- **Versão PDF**: `src/screens/resume/resume-print.tsx`, que só aparece na impressão. Layout pensado para ATS: uma coluna, Arial, datas MM/AAAA, títulos de seção convencionais.
+- PDFs ficam em `public/curriculo/` (um por idioma). **Ao mudar o conteúdo, regenere**: abra `/curriculo`, `/en/curriculo` e `/es/curriculo` no Chrome, use Ctrl+P → "Salvar como PDF" (A4, sem cabeçalhos/rodapés) e substitua os arquivos.
+- O telefone aparece só no PDF, não na página pública.

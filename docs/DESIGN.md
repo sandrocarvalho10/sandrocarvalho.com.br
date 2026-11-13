@@ -117,7 +117,9 @@ Botões de ícone: `rounded-md` (LinkedIn no About), `rounded-full` (GitHub, set
 | Entrada de card | Fade + subida de 32px + scale 0.98 → 1, 0.9s. Acima da dobra: CSS `animate-card-in`; abaixo: GSAP + ScrollTrigger (`top 88%`) |
 | Tilt 3D | `AnimatedCard`: rotação de até ±4° seguindo o cursor, `perspective: 1400px` |
 | Spotlight | Radial de 480px na cor `glowColor` do card (8% de alfa) seguindo o cursor + anel de borda no hover |
-| Float | Avatar e contato flutuam de 8 a 18px em `sine.inOut`, cerca de 3s, yoyo infinito (GSAP) |
+| Float | Retrato ASCII: `animate-float` (CSS, 8 a 18px, 3,2s). Contato: mesmo movimento via GSAP |
+| Dissolve ASCII | Cada caractere vira poeira (`@%#*+=-:.`), sobe e vai para a direita com fade; varredura em diagonal com ruído. 1,1s para sumir, 0,9s para voltar. Em celular alterna com toque |
+| Slider da stack | `animate-marquee` (translate −50% com conteúdo duplicado), máscara de fade nas bordas; ícones ganham a cor da marca em cascata (60ms) ao revelar |
 | Vidro | `backdrop-blur-lg` **só em cards translúcidos** (contato, HVEX), onde as partículas aparecem por trás. Em cards opacos não tem efeito: usar `isolate` |
 | Fundo girando | imagem 1010×1010 centralizada, `animate-rotate-bg` (40s por volta, linear, contínuo; sem mudança no hover, porque alterar `animation-duration` no meio faz a imagem pular), opacidade 60% |
 | Glow de imagem | `drop-shadow(0 0 15px rgba(255,215,0,.6))` (quente) / `rgba(0,191,255,.6)` (frio) |
@@ -166,7 +168,9 @@ Ritmo de proporções: `3:1 → 4:5 → 1:1 → 3:1`. A alternância evita que a
 |---|---|---|---|
 | `Header` | `screens/landingPage/header.tsx` | Logo "Sandro, Developer_" + nav (vazia) + menu mobile | — |
 | `CardAnimated` | `screens/components/card-animated.tsx` | Apresentação: avatar, nome, redes, headline e bio | Neutro + fundo girando |
-| `CardAnimatedAvatar` | `card-animated-avatar.tsx` | Ilustração do avatar sobre anéis dourados | Quente |
+| `CardAnimatedAvatar` | `card-animated-avatar.tsx` | Retrato ASCII que se dissolve no hover e revela o slider da stack | Quente (fundo escuro + anéis a 10%) |
+| `AsciiReveal` | `ascii-reveal.tsx` | Retrato ASCII em `<canvas>` (`public/ascii/retrato.json`); hover/toque/foco dissolve em "poeira" e expõe `children` | — |
+| `TechMarquee` | `tech-marquee.tsx` | 4 faixas de ícones (sprite `public/icons/tech.svg`) em velocidades e sentidos diferentes; brancos a 10% em repouso, cor da marca quando revelado | — |
 | `CardCurrentWork` | `card-current-work.tsx` | "Atualmente trabalhando na HVEX" + logo em perspectiva | Frio (banner) |
 | `CardCurrentWorkPortfolio` | `card-current-work.tsx` | Link hvex.com.br + screenshot do site | Navy/ciano |
 | `CardPortfolio` | `card-portfolio.tsx` | Screenshot de projeto sobre anéis azuis | Frio |
