@@ -38,6 +38,9 @@ export function AnimatedCard({
   useLayoutEffect(() => {
     const el = cardRef.current;
     if (!el) return;
+    // Página aberta já em modo impressão (ex.: Chrome headless gerando o PDF):
+    // os cards estão em display:none e o ScrollTrigger quebra ao medir.
+    if (window.matchMedia("print").matches) return;
 
     const ctx = gsap.context(() => {
       if (!aboveTheFold) gsap.fromTo(

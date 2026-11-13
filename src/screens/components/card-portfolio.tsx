@@ -4,11 +4,14 @@ import { AnimatedCard } from "./animated-card";
 interface  ICardPortfolioProps {
     src?: string;
     alt?: string;
+    /** Lado do card na linha: o canto menor fica virado para o vizinho */
+    side?: "left" | "right";
 }
 
 export function CardPortfolio({
     src = "/juninhopersonal.png",
-    alt = "Screenshot de projeto do portfólio"
+    alt = "Screenshot de projeto do portfólio",
+    side = "left",
 }: ICardPortfolioProps) {
     // next/image exige caminho absoluto para arquivos de /public
     const imageSrc = src.startsWith("/") ? src : `/${src}`;
@@ -16,7 +19,7 @@ export function CardPortfolio({
     return (
         <AnimatedCard
             glowColor="56, 189, 248"
-            className="relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] bg-[#131311] p-12 border border-white/5 md:min-h-[300px] aspect-video"
+            className={`relative w-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] ${side === "left" ? "rounded-tr-lg" : "rounded-tl-lg"} bg-[#131311] p-12 border border-white/5 md:min-h-[300px] aspect-video`}
         >
             {/* Radial blur com anéis concêntricos em tons de azul com centro na parte inferior */}
             <div className="absolute inset-0 z-0" style={{

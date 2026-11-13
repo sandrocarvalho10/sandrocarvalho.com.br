@@ -1,30 +1,33 @@
 import Image from "next/image";
 import { AnimatedCard } from "./animated-card";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-function CardHeader() {
+type T = Dictionary["skills"];
+
+function CardHeader({ t }: { t: T }) {
 
     return (
         <div className="w-full flex items-center justify-between">
             <h4 className="text-base font-light text-white opacity-80">
-                Sempre procurando aprender e evoluir...
+                {t.kicker}
             </h4>
 
         </div>
     )
 }
 
-function CardContent() {
+function CardContent({ t }: { t: T }) {
     return (
         <div className="flex flex-col gap-4">
-            <h1 className="text-2xl md:text-3xl font-normal w-full leading-8 md:leading-10 max-w-full md:max-w-[50%]">Atualmente eu estou aprendendo no curso.dev</h1>
+            <h1 className="text-2xl md:text-3xl font-normal w-full leading-8 md:leading-10 max-w-full md:max-w-[50%]">{t.title}</h1>
             <p className="text-base font-extralight leading-7 md:leading-9 max-w-full md:max-w-[60%]">
-                Estou aprimorando minhas habilidades em React, TypeScript e Next.js, Node.js com foco em performance e escalabilidade. Além disso, estou explorando novas tecnologias e ferramentas para melhorar minha produtividade e qualidade de código.
+                {t.text}
             </p>
         </div>
     )
 }
 
-export function CardSkills() {
+export function CardSkills({ t }: { t: T }) {
     return (
         <AnimatedCard
             glowColor="74, 222, 128"
@@ -32,7 +35,7 @@ export function CardSkills() {
         >
 
             {/* Background animado */}
-            <div className="absolute left-1/2 top-1/2 z-0 h-[1010px] w-[1010px] -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform">
+            <div className="absolute left-1/2 top-1/2 z-0 size-[1600px] -translate-x-1/2 -translate-y-1/2 pointer-events-none will-change-transform">
                 <div className="w-full h-full animate-rotate-bg">
                     <Image
                         src="/card-skills-bg.png"
@@ -45,8 +48,8 @@ export function CardSkills() {
                 </div>
             </div>
 
-            <CardHeader />
-            <CardContent />
+            <CardHeader t={t} />
+            <CardContent t={t} />
         </AnimatedCard>
 
     )

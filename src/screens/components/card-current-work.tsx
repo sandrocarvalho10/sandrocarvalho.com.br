@@ -1,17 +1,18 @@
 import { ArrowRight, ExternalLinkIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export function CardCurrentWork() {
+export function CardCurrentWork({ t }: { t: Dictionary["currentWork"] }) {
     return (
         <div className="relative w-full mx-auto overflow-hidden rounded-lg rounded-tl-[50px] rounded-tr-[50px] rounded-bl-[50px] 
                         isolate p-6 md:p-12 border border-white/5 min-h-[400px]
                         bg-[url('/images/banner2k.avif')] bg-cover bg-[50%_50%]
                         bg-linear-to-br from-blue-900/40 to-blue-400/90">
             <div className="w-full mb-32">
-                <h2 className="text-2xl md:text-4xl font-light w-full max-w-full md:max-w-[80%] leading-tight md:leading-12">Atualmente estou trabalhando na <span className="text-white font-bold">HVEX</span></h2>
+                <h2 className="text-2xl md:text-4xl font-light w-full max-w-full md:max-w-[80%] leading-tight md:leading-12">{t.titleBefore} <span className="text-white font-bold">HVEX</span></h2>
                 <p className="text-sm md:text-md font-extralight leading-7 md:leading-8 max-w-full md:max-w-[80%] mt-4 md:mt-8">
-                    Estou construindo interfaces dinamicas, otimizadas e escalaveis para o setor eletrico, promovendo a melhor experiencia de usuario.
+                    {t.text}
                 </p>
             </div>
 
@@ -32,7 +33,7 @@ export function CardCurrentWork() {
     )
 }
 
-export function CardCurrentWorkPortfolio() {
+export function CardCurrentWorkPortfolio({ t }: { t: Dictionary["currentWork"] }) {
     return (
         <div className="relative w-full mx-auto overflow-hidden 
                         rounded-lg rounded-tr-[50px] rounded-tl-[50px] rounded-br-[50px] 
@@ -79,7 +80,7 @@ export function CardCurrentWorkPortfolio() {
                     </span>
                 </Link>
                 <p className="text-md font-extralight leading-8 opacity-80 mt-2">
-                    Ensaios, proteção, monitoramento, controle e gestão de ativos no setor elétrico.
+                    {t.siteText}
                 </p>
             </div>
 
@@ -91,7 +92,7 @@ export function CardCurrentWorkPortfolio() {
                 >
                     <Image
                         src="/images/hvex/hvex_site.jpg"
-                        alt="Screenshot do site da HVEX"
+                        alt={t.siteAlt}
                         fill
                         sizes="(min-width: 768px) 460px, 100vw"
                         className="w-full max-w-[460px] mx-auto object-cover object-top rounded-t-[2rem]" 

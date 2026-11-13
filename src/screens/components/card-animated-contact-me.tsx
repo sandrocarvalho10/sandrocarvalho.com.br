@@ -6,8 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { AnimatedCard } from "./animated-card";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-export function CardAnimatedContactMe() {
+export function CardAnimatedContactMe({ t }: { t: Dictionary["contact"] }) {
     const imgRef = useRef<HTMLImageElement>(null);
 
     useLayoutEffect(() => {
@@ -66,20 +67,20 @@ export function CardAnimatedContactMe() {
             {/* Conteúdo */}
             <div className="relative z-30 pt-4 pl-4 w-full max-w-[80%] md:max-w-[80%]">
                 <h2 className="text-3xl font-medium text-white mb-8">
-                    Contate-me
+                    {t.title}
                 </h2>
                 <div className="font-light text-white w-full max-w-[70%]">
-                    Entre em contato via e-mail ou linkedin
+                    {t.text}
                 </div>
 
                 <div className="w-16 pt-8 md:pt-24 flex flex-col justify-end items-end ">
 
-                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" aria-label="LinkedIn de Sandro Carvalho" className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" aria-label={t.linkedin} className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <LinkedinIcon className="group-hover:fill-white transition-colors" />
                     </Link>
 
 
-                    <Link href="mailto:sandro.luiz97@outlook.com" aria-label="Enviar e-mail para Sandro Carvalho" className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
+                    <Link href="mailto:sandro.luiz97@outlook.com" aria-label={t.email} className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
                         <Mail />
                     </Link>
 
