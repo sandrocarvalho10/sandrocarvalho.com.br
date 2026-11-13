@@ -2,12 +2,16 @@ import { ImageResponse } from 'next/og'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { archivo } from "@/fonts/index"
+import { defaultLocale, isLocale } from "@/i18n/config"
+import { getDictionary } from "@/i18n/dictionaries"
 
 export const alt = 'Sandro Carvalho — Developer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
-export default async function Image() {
+export default async function Image({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params
+  const t = getDictionary(isLocale(lang) ? lang : defaultLocale)
   const avatarData = await readFile(path.join(process.cwd(), 'public/avatar_contact.png'))
   const avatarSrc = `data:image/png;base64,${avatarData.toString('base64')}`
 
@@ -64,7 +68,7 @@ export default async function Image() {
               sandrocarvalho.com.br
             </span>
             <span style={{ fontSize: '24px', fontWeight: 700, color: '#1a0a00', fontFamily: archivo.style.fontFamily, }}>
-              Full Stack Developer
+              {t.meta.ogRole}
             </span>
           </div>
 
@@ -78,7 +82,7 @@ export default async function Image() {
               fontFamily: archivo.style.fontFamily,
             }}
           >
-            Apaixonado por transformar ideias em projetos e interfaces eficientes.
+            {t.hero.title}
           </div>
         </div>
 
