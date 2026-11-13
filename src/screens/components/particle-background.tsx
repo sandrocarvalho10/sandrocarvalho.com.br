@@ -183,7 +183,7 @@ export function ParticleBackground() {
         <div
             ref={hostRef}
             aria-hidden
-            className="pointer-events-none fixed inset-0 -z-10 opacity-70"
+            className="pointer-events-none fixed inset-0 -z-10 opacity-70 print:hidden"
         />
     );
 }
