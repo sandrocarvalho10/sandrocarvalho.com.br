@@ -21,8 +21,52 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Entrada dos cards acima da dobra. Usa translate/scale (propriedades
+   independentes) para não brigar com o transform inline do tilt do GSAP. */
+@theme {
+  /* Fundo girando dos cards About e Skills. Só rotação: o container externo
+     já faz a centralização com -translate-1/2. */
+  --animate-rotate-bg: rotate-bg 40s linear infinite;
+
+  @keyframes rotate-bg {
+    to {
+      rotate: 360deg;
+    }
+  }
+
+  /* Faixas de ícones do card do avatar (duração/sentido definidos por faixa) */
+  --animate-marquee: marquee 50s linear infinite;
+
+  @keyframes marquee {
+    to {
+      translate: -50% 0;
+    }
+  }
+
+  /* Flutuação suave do retrato ASCII */
+  --animate-float: float 3.2s ease-in-out infinite alternate;
+
+  @keyframes float {
+    from {
+      translate: 0 -8px;
+    }
+    to {
+      translate: 0 -18px;
+    }
+  }
+
+  --animate-card-in: card-in 0.9s cubic-bezier(0.215, 0.61, 0.355, 1) backwards;
+
+  @keyframes card-in {
+    from {
+      opacity: 0;
+      translate: 0 32px;
+      scale: 0.98;
+    }
+  }
 }
 
 /* @theme {
@@ -48,5 +92,38 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rotate-bg {
+    animation: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-float {
+    animation: none;
+  }
+}
+
+/* Rolagem suave para âncoras do menu (ex.: "Projetos") */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Impressão / PDF do currículo: folha A4 branca. O conteúdo de tela usa
+   print:hidden e a versão clássica (ResumePrint) usa hidden print:block. */
+@page {
+  size: A4;
+  margin: 14mm 16mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    color: #262626;
+  }
 }
