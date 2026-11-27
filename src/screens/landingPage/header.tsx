@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { htmlLang, localeName, localePath, locales, type Locale, type SitePath } from '@/i18n/config';
 import type { Dictionary } from '@/i18n/dictionaries';
+import { FEATURES } from '@/config/features';
 import { Flag } from '../components/flags';
 import { menuItemClass, Popover } from '../components/popover';
 
@@ -17,7 +18,7 @@ interface HeaderProps {
 }
 
 const navLink =
-  'text-lg font-light text-white/50 transition-colors hover:text-white focus-visible:text-white outline-none';
+  'text-lg font-light text-white/60 transition-colors hover:text-white focus-visible:text-white outline-none';
 
 function SoonBadge({ children }: { children: React.ReactNode }) {
   return (
@@ -36,7 +37,7 @@ function ResumeItem({ icon, title, hint }: { icon: React.ReactNode; title: strin
       </span>
       <span className="flex flex-col">
         <span className="font-medium text-white/90">{title}</span>
-        <span className="text-xs font-light text-white/40">{hint}</span>
+        <span className="text-xs font-light text-white/60">{hint}</span>
       </span>
     </>
   );
@@ -58,7 +59,7 @@ export function Header({ lang, path, t, resumePdf }: HeaderProps) {
           <span className='font-bold text-2xl'>
             Sandro
           </span>
-          <span className='font-extralight opacity-50'>
+          <span className='font-extralight text-white/60'>
             , Developer_
           </span>
         </Link>
@@ -92,10 +93,12 @@ export function Header({ lang, path, t, resumePdf }: HeaderProps) {
             )}
           </Popover>
 
-          <span aria-disabled className="inline-flex items-center gap-2 text-lg font-light text-white/30 cursor-default">
-            {t.blog}
-            <SoonBadge>{t.soon}</SoonBadge>
-          </span>
+          {FEATURES.blog && (
+            <span aria-disabled className="inline-flex items-center gap-2 text-lg font-light text-white/55 cursor-default">
+              {t.blog}
+              <SoonBadge>{t.soon}</SoonBadge>
+            </span>
+          )}
         </nav>
 
         {/* Idioma (canto direito) */}
@@ -103,7 +106,7 @@ export function Header({ lang, path, t, resumePdf }: HeaderProps) {
           <Popover
             label={t.language}
             align="end"
-            triggerClassName="relative grid place-items-center text-white/40 transition-colors hover:text-white data-[open=true]:text-white outline-none focus-visible:text-white"
+            triggerClassName="relative grid place-items-center text-white/60 transition-colors hover:text-white data-[open=true]:text-white outline-none focus-visible:text-white"
             trigger={
               <>
                 <Globe className="size-6" />
@@ -158,7 +161,7 @@ export function Header({ lang, path, t, resumePdf }: HeaderProps) {
               {t.projects}
             </Link>
 
-            <span className="px-3 pt-3 pb-1 text-xs uppercase tracking-[0.2em] text-white/30">{t.resume}</span>
+            <span className="px-3 pt-3 pb-1 text-xs uppercase tracking-[0.2em] text-white/60">{t.resume}</span>
             <a href={resumePdf} download onClick={closeMobile} className={`${menuItemClass} group/item`}>
               <ResumeItem icon={<FileDown className="size-4" />} title={t.downloadPdf} hint={t.downloadPdfHint} />
             </a>
@@ -166,10 +169,12 @@ export function Header({ lang, path, t, resumePdf }: HeaderProps) {
               <ResumeItem icon={<Sparkles className="size-4" />} title={t.interactive} hint={t.interactiveHint} />
             </Link>
 
-            <span aria-disabled className={`${menuItemClass} text-white/30 hover:bg-transparent hover:text-white/30`}>
-              {t.blog}
-              <SoonBadge>{t.soon}</SoonBadge>
-            </span>
+            {FEATURES.blog && (
+              <span aria-disabled className={`${menuItemClass} text-white/55 hover:bg-transparent hover:text-white/55`}>
+                {t.blog}
+                <SoonBadge>{t.soon}</SoonBadge>
+              </span>
+            )}
 
             <div className="mt-2 flex gap-2 border-t border-white/10 px-1 pt-3" aria-label={t.language} role="group">
               {locales.map((l) => (

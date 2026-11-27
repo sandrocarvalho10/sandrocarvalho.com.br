@@ -170,9 +170,9 @@ Ritmo de proporções: `3:1 → 4:5 → 1:1 → 3:1`. A alternância evita que a
 | `CardAnimated` | `screens/components/card-animated.tsx` | Apresentação: avatar, nome, redes, headline e bio | Neutro + fundo girando |
 | `CardAnimatedAvatar` | `card-animated-avatar.tsx` | Retrato ASCII que se dissolve no hover e revela o slider da stack | Quente (fundo escuro + anéis a 10%) |
 | `AsciiReveal` | `ascii-reveal.tsx` | Retrato ASCII em `<canvas>` (`public/ascii/retrato.json`); hover/toque/foco dissolve em "poeira" e expõe `children` | — |
-| `TechMarquee` | `tech-marquee.tsx` | 4 faixas de ícones (sprite `public/icons/tech.svg`) em velocidades e sentidos diferentes; brancos a 10% em repouso, cor da marca quando revelado | — |
+| `TechHighlights` | `tech-highlights.tsx` | Grade com as 8 tecnologias principais (sprite `public/icons/tech.svg`); brancas a 10% em repouso, cor da marca quando reveladas | — |
 | `CardCurrentWork` | `card-current-work.tsx` | "Atualmente trabalhando na HVEX" + logo em perspectiva | Frio (banner) |
-| `CardCurrentWorkPortfolio` | `card-current-work.tsx` | Link hvex.com.br + screenshot do site | Navy/ciano |
+| `CardProject` / `CardCaseStudy` | `card-project.tsx` | Card de projeto (imagem, problema, papel, stack, "Ver site"/"Código") e card de estudo de caso | Azul / navy |
 | `CardPortfolio` | `card-portfolio.tsx` | Screenshot de projeto sobre anéis azuis | Frio |
 | `CardSkills` | `card-skills.tsx` | Aprendizado atual (curso.dev) | Neutro + fundo girando |
 | `CardAnimatedContactMe` | `card-animated-contact-me.tsx` | CTA de contato: LinkedIn + e-mail | Quente |

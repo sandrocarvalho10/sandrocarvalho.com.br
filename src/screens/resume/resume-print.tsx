@@ -1,6 +1,8 @@
 import type { Dictionary } from "@/i18n/dictionaries";
 import { EXPERIENCE_DATA, RESUME_CONTACT, STACK_GROUPS, type ExperienceId, type StackGroupId } from "@/i18n/resume-data";
 import { techIcon } from "../components/tech-icons";
+import { TodoText } from "../components/todo-text";
+import { PrintPhone } from "./print-phone";
 
 type T = Dictionary["resume"];
 
@@ -22,7 +24,8 @@ function H2({ children }: { children: React.ReactNode }) {
  *   palavras ("PHPe MySQL")
  * - títulos de seção convencionais e datas em MM/AAAA
  * - contatos com rótulo e URLs completas no corpo (não em cabeçalho de página)
- * Aqui o telefone aparece; na página pública, não.
+ * O telefone só é inserido no cliente (PrintPhone): fica no PDF, mas não no
+ * HTML servido da página pública.
  */
 export function ResumePrint({ t }: { t: T }) {
   const L = t.labels;
@@ -30,25 +33,25 @@ export function ResumePrint({ t }: { t: T }) {
   return (
     <article className="hidden print:block bg-white font-[Arial,Helvetica,sans-serif] text-[10pt] leading-snug text-neutral-800">
       <header className="border-b-2 border-neutral-900 pb-3">
-        <h1 className="text-[20pt] font-bold leading-tight text-neutral-950">{t.name}</h1>
+        {/* <p> e não <h1>: a página já tem um h1 (versão de tela) */}
+        <p className="text-[20pt] font-bold leading-tight text-neutral-950">{t.name}</p>
         <p className="text-[12pt] font-bold text-orange-700">{t.role}</p>
         <p className="mt-2 text-[9.5pt] text-neutral-700">
-          {t.location} | {L.phone}: {RESUME_CONTACT.phone} | E-mail: {RESUME_CONTACT.email}
+          {t.location}<PrintPhone label={L.phone} /> | E-mail: {RESUME_CONTACT.email}
         </p>
         <p className="text-[9.5pt] text-neutral-700">
           LinkedIn: {RESUME_CONTACT.linkedin} | GitHub: {RESUME_CONTACT.github}
         </p>
       </header>
 
-      <H2>{L.objective}</H2>
-      <p>{t.objective}</p>
-
       <H2>{L.summary}</H2>
       <p>{t.summary}</p>
 
       <H2>{L.experience}</H2>
-      {t.experience.map((job) => {
+      {t.experience.map((job, i) => {
         const data = EXPERIENCE_DATA[job.id as ExperienceId];
+        // Cargos seguidos na mesma empresa: a stack aparece só uma vez, no último
+        const showStack = t.experience[i + 1]?.company !== job.company;
         return (
           <section key={job.id} className="mb-3 break-inside-avoid">
             <h3 className="font-bold text-neutral-950">{job.role}</h3>
@@ -56,15 +59,19 @@ export function ResumePrint({ t }: { t: T }) {
               {job.company}
               {job.place && ` | ${job.place}`} | {data.start} - {data.end ?? L.current}
             </p>
+            {(job.bullets.length > 0 || job.highlights.length > 0) && (
             <ul className="mt-1 list-disc pl-5">
-              {job.bullets.map((b) => <li key={b}>{b}</li>)}
+              {job.bullets.map((b) => <li key={b}><TodoText text={b} /></li>)}
               {job.highlights.map((h) => (
                 <li key={h.name}>{h.name}: {h.text}</li>
               ))}
             </ul>
-            <p className="mt-1 text-[9pt] text-neutral-600">
-              {L.stack}: {data.stack.map(name).join(", ")}
-            </p>
+            )}
+            {showStack && (
+              <p className="mt-1 text-[9pt] text-neutral-600">
+                {L.stack}: {data.stack.map(name).join(", ")}
+              </p>
+            )}
           </section>
         );
       })}
@@ -105,13 +112,6 @@ export function ResumePrint({ t }: { t: T }) {
           {t.languages.map((l) => (
             <li key={l.name}>{l.name}: {l.level}</li>
           ))}
-        </ul>
-      </div>
-
-      <div className="break-inside-avoid">
-        <H2>{L.qualities}</H2>
-        <ul className="list-disc pl-5">
-          {t.qualities.map((q) => <li key={q}>{q}</li>)}
         </ul>
       </div>
 

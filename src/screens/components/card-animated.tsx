@@ -1,8 +1,9 @@
-import { GithubIcon, LinkedinIcon } from "lucide-react";
+import { ArrowDownToLine, FolderOpen, GithubIcon, LinkedinIcon, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { AnimatedCard } from "./animated-card";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { projectButtonClass } from "./card-project";
 
 type T = Dictionary["hero"];
 
@@ -23,7 +24,7 @@ function CardHeader({ t }: { t: T }) {
                 </span>
                 <div className="text-sm font-light flex flex-col gap-0">
                     <span className="text-white opacity-60 font-medium text-lg">{t.greeting}</span>
-                    <span className="text-sm opacity-40">{t.role}</span>
+                    <span className="text-sm text-white/65">{t.role}</span>
                 </div>
 
             </div>
@@ -46,16 +47,32 @@ function CardHeader({ t }: { t: T }) {
     )
 }
 
-function CardContent({ t }: { t: T }) {
+function CardContent({ t, resumePdf }: { t: T; resumePdf: string }) {
     return (
         <div className="flex flex-col gap-8">
             <h1 className="text-3xl md:text-5xl font-light w-full max-w-full md:max-w-[90%] leading-tight md:leading-16">{t.title}</h1>
             <p className="text-base md:text-lg font-extralight leading-8 md:leading-10 max-w-full md:max-w-[60%]">{t.text}</p>
+
+            {/* Ações principais */}
+            <div className="flex flex-wrap gap-3">
+                <a href="#projetos" className={projectButtonClass.primary}>
+                    <FolderOpen aria-hidden className="size-4" />
+                    {t.ctaProjects}
+                </a>
+                <a href={resumePdf} download className={projectButtonClass.secondary}>
+                    <ArrowDownToLine aria-hidden className="size-4" />
+                    {t.ctaResume}
+                </a>
+                <a href="#contato" className={projectButtonClass.secondary}>
+                    <MessageCircle aria-hidden className="size-4" />
+                    {t.ctaContact}
+                </a>
+            </div>
         </div>
     )
 }
 
-export function CardAnimated({ t }: { t: T }) {
+export function CardAnimated({ t, resumePdf }: { t: T; resumePdf: string }) {
     return (
         <AnimatedCard
             glowColor="245, 179, 76"
@@ -76,7 +93,7 @@ export function CardAnimated({ t }: { t: T }) {
                 </div>
             </div>
             <CardHeader t={t} />
-            <CardContent t={t} />
+            <CardContent t={t} resumePdf={resumePdf} />
         </AnimatedCard>
 
     )

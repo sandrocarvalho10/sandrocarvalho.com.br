@@ -33,4 +33,4 @@ export function localePath(locale: Locale, path: string = "/") {
 }
 
 /** Páginas que existem nos três idiomas (usado no seletor de idioma) */
-export type SitePath = "/" | "/curriculo";
+export type SitePath = "/" | "/curriculo" | `/projetos/${string}`;

@@ -1,9 +1,10 @@
-import { ArrowDownToLine, Award, GithubIcon, GraduationCap, Languages, LinkedinIcon, Mail, MapPin, Quote } from "lucide-react";
+import { ArrowDownToLine, Award, GithubIcon, GraduationCap, Languages, LinkedinIcon, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import type { Dictionary } from "@/i18n/dictionaries";
 import { EXPERIENCE_DATA, RESUME_CONTACT, STACK_GROUPS, type ExperienceId, type StackGroupId } from "@/i18n/resume-data";
 import { AnimatedCard } from "../components/animated-card";
+import { TodoText } from "../components/todo-text";
 import { CountUp } from "./count-up";
 import { TechChip } from "./tech-chip";
 import { Timeline } from "./timeline";
@@ -41,7 +42,7 @@ function HeroCard({ t }: { t: T }) {
           </span>
           <div className="flex flex-col">
             <span className="text-lg font-medium text-white/60">{t.kicker}</span>
-            <span className="text-sm opacity-40">{t.role}</span>
+            <span className="text-sm text-white/65">{t.role}</span>
           </div>
         </div>
 
@@ -59,7 +60,7 @@ function HeroCard({ t }: { t: T }) {
       <div className="flex flex-col gap-6">
         <h1 className="text-4xl md:text-6xl font-light leading-tight">
           {t.shortName}
-          <span className="block text-2xl md:text-3xl text-white/40">{t.role}</span>
+          <span className="mt-2 block text-xl md:text-3xl text-white/65">{t.role}</span>
         </h1>
         <p className="max-w-full text-base md:text-lg font-extralight leading-8 md:max-w-[75%] md:leading-9">{t.summary}</p>
       </div>
@@ -107,7 +108,7 @@ function StatsCard({ t }: { t: T }) {
         {t.stats.map((s) => (
           // dt antes do dd no HTML (semântica); flex-col-reverse põe o número em cima
           <div key={s.label} className="flex flex-col-reverse gap-1">
-            <dt className="text-sm font-light text-white/80">{s.label}</dt>
+            <dt className="text-sm font-light text-white">{s.label}</dt>
             <dd className="text-6xl md:text-7xl font-extrabold leading-none tracking-tight text-white">
               <CountUp value={s.value} suffix={s.suffix} />
             </dd>
@@ -120,16 +121,6 @@ function StatsCard({ t }: { t: T }) {
 
 /* ------------------------------------------------------------------ */
 
-function ObjectiveCard({ t }: { t: T }) {
-  return (
-    <AnimatedCard glowColor="245, 179, 76" className={`${CARD} rounded-tr-lg rounded-tl-[50px] rounded-bl-[50px]`}>
-      <SectionTitle icon={<Quote className="size-5" />}>{t.labels.objective}</SectionTitle>
-      <p className="relative z-10 text-xl md:text-2xl font-light leading-relaxed text-white/90">{t.objective}</p>
-
-    </AnimatedCard>
-  );
-}
-
 function ExperienceCard({ t }: { t: T }) {
   return (
     <AnimatedCard glowColor="56, 189, 248" tiltStrength={1} className={`${CARD} rounded-tl-lg rounded-tr-[50px] rounded-br-[50px]`}>
@@ -137,8 +128,10 @@ function ExperienceCard({ t }: { t: T }) {
 
       <Timeline>
         <ol className="relative flex flex-col gap-14">
-          {t.experience.map((job) => {
+          {t.experience.map((job, i) => {
             const data = EXPERIENCE_DATA[job.id as ExperienceId];
+            // Cargos seguidos na mesma empresa: a stack aparece só uma vez, no último
+            const showStack = t.experience[i + 1]?.company !== job.company;
             return (
               <li key={job.id} data-tl-item className="relative pl-10 md:pl-14" style={{ "--job": data.glow } as React.CSSProperties}>
                 {/* Marcador na linha */}
@@ -160,23 +153,25 @@ function ExperienceCard({ t }: { t: T }) {
                 </div>
 
                 <h3 className="mt-2 text-xl md:text-2xl font-light text-white">{job.role}</h3>
-                <p className="mt-1 text-sm font-light text-white/50">
+                <p className="mt-1 text-sm font-light text-white/65">
                   {job.company}
                   {job.place && <> · {job.place}</>}
                 </p>
 
+                {job.bullets.length > 0 && (
                 <ul className="mt-5 flex flex-col gap-2">
                   {job.bullets.map((b) => (
                     <li key={b} className="flex gap-3 font-extralight leading-7 text-white/80">
                       <span aria-hidden className="mt-3 h-px w-3 shrink-0 bg-[rgba(var(--job),0.7)]" />
-                      {b}
+                      <span><TodoText text={b} /></span>
                     </li>
                   ))}
                 </ul>
+                )}
 
                 {job.highlights.length > 0 && (
                   <div className="mt-6">
-                    <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-white/40">{t.labels.highlights}</h4>
+                    <h4 className="mb-3 text-xs uppercase tracking-[0.2em] text-white/65">{t.labels.highlights}</h4>
                     <div className="grid gap-3 sm:grid-cols-2">
                       {job.highlights.map((h) => (
                         <div
@@ -192,11 +187,13 @@ function ExperienceCard({ t }: { t: T }) {
                   </div>
                 )}
 
-                <ul className="mt-6 flex flex-wrap gap-2">
-                  {data.stack.map((s) => (
-                    <TechChip key={s} item={s} />
-                  ))}
-                </ul>
+                {showStack && (
+                  <ul className="mt-6 flex flex-wrap gap-2">
+                    {data.stack.map((s) => (
+                      <TechChip key={s} item={s} />
+                    ))}
+                  </ul>
+                )}
               </li>
             );
           })}
@@ -220,7 +217,7 @@ function StackCard({ t }: { t: T }) {
       <div className="flex flex-col gap-6">
         {(Object.keys(STACK_GROUPS) as StackGroupId[]).map((g) => (
           <div key={g}>
-            <h3 className="mb-3 text-xs uppercase tracking-[0.2em] text-white/40">{t.stackGroups[g]}</h3>
+            <h3 className="mb-3 text-xs uppercase tracking-[0.2em] text-white/65">{t.stackGroups[g]}</h3>
             <ul className="flex flex-wrap gap-2">
               {STACK_GROUPS[g].map((s) => (
                 <TechChip key={s} item={s} />
@@ -250,7 +247,7 @@ function EducationCard({ t }: { t: T }) {
           <li key={e.title} className="flex flex-col">
             <span className="text-sm text-sky-300/80">{e.period}</span>
             <span className="text-xl font-light text-white">{e.title}</span>
-            <span className="text-sm font-light text-white/50">{e.school}</span>
+            <span className="text-sm font-light text-white/65">{e.school}</span>
           </li>
         ))}
       </ul>
@@ -262,9 +259,9 @@ function EducationCard({ t }: { t: T }) {
             <li key={c.title} className="flex items-baseline justify-between gap-4 py-3">
               <span className="font-light text-white/85">
                 {c.title}
-                {c.provider && <span className="text-white/40"> · {c.provider}</span>}
+                {c.provider && <span className="text-white/65"> · {c.provider}</span>}
               </span>
-              <span className="shrink-0 text-sm text-white/40 tabular-nums">{c.detail}</span>
+              <span className="shrink-0 text-sm text-white/65 tabular-nums">{c.detail}</span>
             </li>
           ))}
         </ul>
@@ -275,34 +272,13 @@ function EducationCard({ t }: { t: T }) {
 
 /* ------------------------------------------------------------------ */
 
-function QualitiesCard({ t }: { t: T }) {
-  return (
-    <AnimatedCard glowColor="245, 179, 76" className={`${CARD} h-full rounded-br-lg rounded-tl-[50px]`}>
-      <SectionTitle>{t.labels.qualities}</SectionTitle>
-      <ul className="grid gap-4 sm:grid-cols-2">
-        {t.qualities.map((q, i) => (
-          <li
-            key={q}
-            className="group/q flex gap-4 rounded-2xl border border-white/5 bg-white/[0.02] p-4 transition-colors duration-300 hover:border-amber-400/30 hover:bg-white/[0.04]"
-          >
-            <span className="text-2xl font-light tabular-nums text-amber-300/60 transition-colors group-hover/q:text-amber-300">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <span className="font-light leading-7 text-white/80">{q}</span>
-          </li>
-        ))}
-      </ul>
-    </AnimatedCard>
-  );
-}
-
 function LanguagesCard({ t }: { t: T }) {
   return (
     <AnimatedCard
       glowColor="251, 146, 60"
       className="relative h-full w-full overflow-hidden isolate rounded-[2rem] rounded-bl-lg rounded-tr-[50px] border border-white/5 bg-linear-to-br from-orange-600/70 to-amber-400/70 p-6 md:p-10"
     >
-      <h2 className="mb-6 flex items-center gap-3 text-lg font-medium text-white/80">
+      <h2 className="mb-6 flex items-center gap-3 text-lg font-medium text-white">
         <Languages className="size-5" />
         {t.labels.languages}
       </h2>
@@ -310,12 +286,12 @@ function LanguagesCard({ t }: { t: T }) {
         {t.languages.map((l) => (
           <li key={l.name}>
             <span className="block text-2xl font-light text-white">{l.name}</span>
-            <span className="text-sm font-light text-white/80">{l.level}</span>
+            <span className="text-sm font-light text-white">{l.level}</span>
           </li>
         ))}
       </ul>
 
-      <h2 className="mt-10 mb-4 text-lg font-medium text-white/80">{t.labels.contact}</h2>
+      <h2 className="mt-10 mb-4 text-lg font-medium text-white">{t.labels.contact}</h2>
       <div className="flex gap-2">
         <Link href={RESUME_CONTACT.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
           className="group border p-3 transition-all duration-300 hover:scale-105 hover:bg-[#0a66c2] hover:text-white">
@@ -341,12 +317,12 @@ export function Resume({ t }: { t: T }) {
         <StatsCard t={t} />
       </section>
 
-      <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 md:grid-cols-[2fr_3fr] md:gap-8">
-        {/* Objetivo acompanha a rolagem enquanto a timeline passa */}
-        <div className="md:sticky md:top-8 md:self-start">
-          <ObjectiveCard t={t} />
-        </div>
+      <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 md:grid-cols-[3fr_1fr] md:gap-8">
         <ExperienceCard t={t} />
+        {/* Idiomas e contato acompanham a rolagem enquanto a timeline passa */}
+        <div className="md:sticky md:top-8 md:self-start">
+          <LanguagesCard t={t} />
+        </div>
       </section>
 
       <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
@@ -354,10 +330,6 @@ export function Resume({ t }: { t: T }) {
         <EducationCard t={t} />
       </section>
 
-      <section className="mx-auto grid w-full max-w-7xl grid-cols-1 gap-4 md:grid-cols-[3fr_1fr] md:gap-8">
-        <QualitiesCard t={t} />
-        <LanguagesCard t={t} />
-      </section>
     </div>
   );
 }

@@ -40,7 +40,7 @@ Atualizações major disponíveis, que **não** foram aplicadas por exigirem mig
 | BUG-3 | 🔴 | ✅ | `body { font-family: sans-serif }` sobrescrevia a Archivo, e 3 fontes eram pré-carregadas sem uso | `src/styles/global.css`, `src/fonts/fonts.ts` | Regra removida, `--font-sans` → `--font-archivo`; Inter e Roboto Mono removidas (3 → 1 preload) |
 | BUG-4 | 🔴 | ✅ | Erro de TypeScript no `avatar-model.tsx` **quebrava o `next build`** (deploy falhava) | `src/screens/components/avatar-model.tsx` | Trocado por `instanceof THREE.SkinnedMesh` |
 | BUG-5 | 🟡 | ⬜ | Menu de navegação vazio: o hambúrguer abre um painel vazio e o ícone de globo não faz nada | `src/screens/landingPage/header.tsx` | Preencher as âncoras ou esconder o menu |
-| BUG-6 | 🟡 | ⬜ | `next lint` foi removido no Next 16 e o `.eslintrc.json` é incompatível com o ESLint 9 | `package.json`, `.eslintrc.json` | Criar `eslint.config.mjs` (flat config) e usar o script `"lint": "eslint ."` |
+| BUG-6 | 🟡 | ✅ | `next lint` foi removido no Next 16 e o `.eslintrc.json` é incompatível com o ESLint 9 | `package.json`, `.eslintrc.json` | Criar `eslint.config.mjs` (flat config) e usar o script `"lint": "eslint ."` |
 | BUG-7 | 🟡 | ⬜ | `nginx.conf` usa o placeholder `seusite.com` | `infra/nginx.conf` | Trocar para `sandrocarvalho.com.br` |
 | BUG-8 | 🟢 | ⬜ | A OG image não carrega a Archivo (o `ImageResponse` precisa da opção `fonts`) | `src/app/opengraph-image.tsx` | Ler o `.ttf` e passar em `fonts: [...]` |
 | BUG-9 | 🟢 | ⬜ | `themeColor: '#ffffff'` num site escuro | `src/app/layout.tsx` | `#0D0D0D` |
