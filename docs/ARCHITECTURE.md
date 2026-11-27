@@ -39,7 +39,7 @@
     │   ├── page.tsx           # composição da landing page
     │   └── opengraph-image.tsx# OG image dinâmica (next/og)
     ├── screens/
-    │   ├── landingPage/       # seções: header, about, current-work, content, skills, hero
+    │   ├── landingPage/       # seções: header, about, projects, skills, hero
     │   └── components/        # cards e footer usados pelas seções
     ├── fonts/                 # instâncias next/font
     ├── styles/
@@ -110,4 +110,6 @@ Resultado medido (imagens da home): **8,2 MB → ~196 KB**.
 - **Versão interativa**: `src/screens/resume/resume.tsx` (cards, timeline com GSAP, contadores).
 - **Versão PDF**: `src/screens/resume/resume-print.tsx`, que só aparece na impressão. Layout pensado para ATS: uma coluna, Arial, datas MM/AAAA, títulos de seção convencionais.
 - PDFs ficam em `public/curriculo/` (um por idioma). **Ao mudar o conteúdo, regenere**: abra `/curriculo`, `/en/curriculo` e `/es/curriculo` no Chrome, use Ctrl+P → "Salvar como PDF" (A4, sem cabeçalhos/rodapés) e substitua os arquivos.
-- O telefone aparece só no PDF, não na página pública.
+- O telefone aparece só no PDF: não está no HTML da página pública; é inserido no cliente apenas na versão de impressão (`print-phone.tsx`).
+- Dados editáveis: projetos em `src/data/projects.ts`, estudos de caso em `src/data/case-studies.ts` (página `/projetos/<slug>`), tecnologias da home em `src/data/tech-stack.ts`, flags (ex.: Blog no menu) em `src/config/features.ts`.
+- Conteúdo pendente usa o marcador `[TODO: ...]`, destacado na página pelo componente `TodoText`.

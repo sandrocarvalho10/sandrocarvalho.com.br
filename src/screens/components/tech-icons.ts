@@ -1,4 +1,5 @@
-// Tecnologias exibidas no slider do card do avatar.
+// Catálogo de ícones de tecnologia (home e currículo). O que aparece na
+// home é definido em src/data/tech-stack.ts.
 // Os desenhos ficam no sprite public/icons/tech.svg (Simple Icons v16.37.0,
 // licença CC0-1.0; Zustand é um ícone próprio). Cores quase pretas viraram
 // branco para aparecer no fundo escuro.
@@ -51,10 +52,7 @@ export const TECH_ICONS: TechIcon[] = [
   { slug: "githubactions", title: "GitHub Actions", hex: "2088FF" },
 ];
 
-/**
- * Ícones que existem no sprite mas não passam no slider: usados no currículo
- * (experiências antigas e ferramentas específicas). Mesma regra de cor.
- */
+/** Ícones usados só no currículo (experiências antigas e ferramentas específicas). */
 export const EXTRA_TECH_ICONS: TechIcon[] = [
   { slug: "puppeteer", title: "Puppeteer", hex: "40B5A4" },
   { slug: "styledcomponents", title: "styled-components", hex: "DB7093" },

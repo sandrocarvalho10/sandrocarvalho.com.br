@@ -1,6 +1,6 @@
 import { AnimatedCard } from "./animated-card";
 import { AsciiReveal } from "./ascii-reveal";
-import { TechMarquee } from "./tech-marquee";
+import { TechHighlights } from "./tech-highlights";
 import type { Dictionary } from "@/i18n/dictionaries";
 
 export function CardAnimatedAvatar({ t }: { t: Dictionary["avatar"] }) {
@@ -26,11 +26,11 @@ export function CardAnimatedAvatar({ t }: { t: Dictionary["avatar"] }) {
                 className="absolute inset-0 z-20 cursor-crosshair"
                 label={t.label}
             >
-                <TechMarquee />
+                <TechHighlights />
 
                 {/* Mesma tipografia do "Olá, Eu sou Sandro." (card-animated) */}
                 <span className="absolute top-8 left-8 text-lg font-medium text-white/0 transition-colors duration-700 delay-300
-                                 group-data-[revealed=true]/reveal:text-white/60">
+                                 group-data-[revealed=true]/reveal:text-white/70">
                     {t.stack}
                 </span>
             </AsciiReveal>

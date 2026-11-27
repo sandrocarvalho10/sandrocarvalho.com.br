@@ -9,16 +9,25 @@
 
 export const RESUME_CONTACT = {
   email: "sandro.luiz97@outlook.com",
-  // Só no PDF: na página pública o telefone não aparece (evita robôs de spam)
-  phone: "(35) 98867-0983",
-  phoneHref: "tel:+5535988670983",
   linkedin: "https://www.linkedin.com/in/sandro-carvalho-dev/",
   linkedinLabel: "linkedin.com/in/sandro-carvalho-dev",
   github: "https://github.com/sandrocarvalho10",
   githubLabel: "github.com/sandrocarvalho10",
 };
 
-export type ExperienceId = "hvex" | "ibc" | "fepi" | "support";
+/**
+ * Telefone: só no PDF. Não vai no HTML da página pública (evita robôs de
+ * spam); é inserido no cliente apenas na versão de impressão (PrintPhone).
+ * Guardado em partes para não aparecer inteiro no código-fonte servido.
+ */
+export const RESUME_PHONE_PARTS = ["(35)", "98867", "0983"] as const;
+
+export type ExperienceId = "hvex" | "hvex-analyst" | "ibc" | "fepi" | "support";
+
+const HVEX_STACK = [
+  "react", "nextdotjs", "typescript", "zustand", "Context API", "reactquery",
+  "reacthookform", "zod", "Yup", "gsap", "ApexCharts", "observable", "puppeteer", "docker",
+];
 
 // start/end em MM/AAAA: formato que os ATS (triagem automática) reconhecem
 export const EXPERIENCE_DATA: Record<
@@ -27,12 +36,15 @@ export const EXPERIENCE_DATA: Record<
 > = {
   hvex: {
     current: true,
-    start: "05/2021",
+    start: "06/2026",
     glow: "56, 189, 248",
-    stack: [
-      "react", "nextdotjs", "typescript", "zustand", "Context API", "reactquery",
-      "reacthookform", "zod", "Yup", "gsap", "ApexCharts", "observable", "puppeteer", "docker",
-    ],
+    stack: HVEX_STACK, // TODO: confirmar se a stack do cargo Pleno é a mesma
+  },
+  "hvex-analyst": {
+    start: "05/2021",
+    end: "06/2026",
+    glow: "56, 189, 248",
+    stack: HVEX_STACK,
   },
   ibc: {
     start: "04/2019",

@@ -37,15 +37,6 @@
     }
   }
 
-  /* Faixas de ícones do card do avatar (duração/sentido definidos por faixa) */
-  --animate-marquee: marquee 50s linear infinite;
-
-  @keyframes marquee {
-    to {
-      translate: -50% 0;
-    }
-  }
-
   /* Flutuação suave do retrato ASCII */
   --animate-float: float 3.2s ease-in-out infinite alternate;
 
@@ -55,6 +46,19 @@
     }
     to {
       translate: 0 -18px;
+    }
+  }
+
+  /* Flutuação leve dos ícones de tecnologia do card do avatar.
+     Duração e atraso variam por ícone (ver tech-highlights.tsx). */
+  --animate-drift: drift 4.5s ease-in-out infinite alternate;
+
+  @keyframes drift {
+    from {
+      translate: -2px -4px;
+    }
+    to {
+      translate: 2px 4px;
     }
   }
 
@@ -100,8 +104,8 @@ body {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-float {
+  .animate-float,
+  .animate-drift {
     animation: none;
   }
 }

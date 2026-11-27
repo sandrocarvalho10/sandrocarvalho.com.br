@@ -5,9 +5,13 @@ import { archivo } from "@/fonts/index"
 import { defaultLocale, isLocale } from "@/i18n/config"
 import { getDictionary } from "@/i18n/dictionaries"
 
-export const alt = 'Sandro Carvalho — Developer'
-export const size = { width: 1200, height: 630 }
-export const contentType = 'image/png'
+const size = { width: 1200, height: 630 }
+
+// Um OG por idioma, com o texto alternativo traduzido
+export function generateImageMetadata({ params }: { params: { lang: string } }) {
+  const t = getDictionary(isLocale(params.lang) ? params.lang : defaultLocale)
+  return [{ id: 'og', alt: t.meta.ogAlt, size, contentType: 'image/png' }]
+}
 
 export default async function Image({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
@@ -88,7 +92,7 @@ export default async function Image({ params }: { params: Promise<{ lang: string
 
         <img
           src={avatarSrc}
-          alt="Sandro"
+          alt=""
           width={560}
           height={560}
           style={{

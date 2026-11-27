@@ -1,12 +1,16 @@
 'use client';
 
 import gsap from "gsap";
-import { LinkedinIcon, Mail } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useLayoutEffect, useRef } from "react";
 import { AnimatedCard } from "./animated-card";
 import type { Dictionary } from "@/i18n/dictionaries";
+import { RESUME_CONTACT } from "@/i18n/resume-data";
+import { CopyButton } from "./copy-button";
+
+const linkBtn =
+    "inline-flex items-center gap-2 border border-white px-3 py-2 text-sm font-medium text-white transition-colors duration-300 backdrop-blur-[3px] outline-none focus-visible:ring-2 focus-visible:ring-white";
 
 export function CardAnimatedContactMe({ t }: { t: Dictionary["contact"] }) {
     const imgRef = useRef<HTMLImageElement>(null);
@@ -34,8 +38,9 @@ export function CardAnimatedContactMe({ t }: { t: Dictionary["contact"] }) {
 
     return (
         <AnimatedCard
+            id="contato"
             glowColor="251, 146, 60"
-            className="relative w-full h-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] rounded-tl-lg rounded-tr-[50px] bg-linear-to-br from-orange-600/70 to-amber-400/70  p-4 border border-white/5 backdrop-blur-lg min-h-[400px]"
+            className="relative w-full h-full max-w-5xl mx-auto overflow-hidden rounded-[2rem] rounded-tl-lg rounded-tr-[50px] bg-linear-to-br from-orange-600/70 to-amber-400/70 p-4 border scroll-mt-8 border-white/5 backdrop-blur-lg min-h-[400px]"
         >
             {/* Radial blur com anéis concêntricos em tons de amarelo com centro na parte inferior */}
             {/* <div className="absolute inset-0 z-0" style={{
@@ -64,26 +69,36 @@ export function CardAnimatedContactMe({ t }: { t: Dictionary["contact"] }) {
                 </div>
             </div>
 
-            {/* Conteúdo */}
-            <div className="relative z-30 pt-4 pl-4 w-full max-w-[80%] md:max-w-[80%]">
-                <h2 className="text-3xl font-medium text-white mb-8">
+            {/* Conteúdo (pb deixa o avatar abaixo dos links) */}
+            <div className="relative z-30 flex flex-col gap-6 p-2 pb-40 md:p-4 md:pb-56">
+                <h2 className="text-3xl font-medium text-white">
                     {t.title}
                 </h2>
-                <div className="font-light text-white w-full max-w-[70%]">
+                <p className="font-light text-white">
                     {t.text}
+                </p>
+
+                {/* E-mail visível + copiar. Fundo escuro translúcido garante
+                    contraste AA sobre o degradê laranja/âmbar. */}
+                <div className="flex flex-col gap-3 rounded-2xl bg-black/35 p-3 backdrop-blur-sm">
+                    <span className="text-xs uppercase tracking-[0.2em] text-white/80">{t.emailLabel}</span>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                        <a href={`mailto:${RESUME_CONTACT.email}`} className="break-all text-sm font-medium text-white underline-offset-4 hover:underline">
+                            {RESUME_CONTACT.email}
+                        </a>
+                        <CopyButton value={RESUME_CONTACT.email} labels={{ copy: t.copy, copied: t.copied, failed: t.copyFailed }} />
+                    </div>
                 </div>
 
-                <div className="w-16 pt-8 md:pt-24 flex flex-col justify-end items-end ">
-
-                    <Link href="https://www.linkedin.com/in/sandro-carvalho-dev/" aria-label={t.linkedin} className="group p-3 border rounded-none hover:text-white hover:bg-[#0a66c2] hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
-                        <LinkedinIcon className="group-hover:fill-white transition-colors" />
-                    </Link>
-
-
-                    <Link href="mailto:sandro.luiz97@outlook.com" aria-label={t.email} className="group p-3 border border-white rounded-none hover:text-[#1593df] hover:bg-white hover:scale-105 transition-all duration-300 backdrop-blur-[3px]" target="_blank" rel="noopener noreferrer">
-                        <Mail />
-                    </Link>
-
+                <div className="flex flex-wrap gap-2">
+                    <a href={RESUME_CONTACT.linkedin} aria-label={t.linkedin} className={`${linkBtn} hover:bg-[#0a66c2] hover:border-[#0a66c2]`} target="_blank" rel="noopener noreferrer">
+                        <LinkedinIcon aria-hidden className="size-4" />
+                        LinkedIn
+                    </a>
+                    <a href={RESUME_CONTACT.github} aria-label={t.github} className={`${linkBtn} hover:bg-black hover:border-black`} target="_blank" rel="noopener noreferrer">
+                        <GithubIcon aria-hidden className="size-4" />
+                        GitHub
+                    </a>
                 </div>
             </div>
 

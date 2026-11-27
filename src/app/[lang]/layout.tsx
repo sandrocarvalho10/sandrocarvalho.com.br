@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: localePath(lang, '/'),
       siteName: 'Sandro Carvalho',
       locale: t.ogLocale,
+      alternateLocale: locales.filter((l) => l !== lang).map((l) => getDictionary(l).meta.ogLocale),
       type: 'website',
     },
     twitter: {

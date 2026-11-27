@@ -2,20 +2,21 @@ import type { Dictionary } from ".";
 
 export const es: Dictionary = {
   meta: {
-    title: "Sandro Carvalho — Developer",
+    title: "Sandro Carvalho — Desarrollador Front-end React & Next.js",
     description:
-      "Portafolio de Sandro Carvalho, desarrollador Full Stack apasionado por transformar ideas en proyectos e interfaces eficientes.",
+      "Portafolio de Sandro Carvalho, Desarrollador Front-end Semi Senior (React, Next.js y TypeScript). Creo interfaces rápidas y escalables, del prototipo a producción.",
     ogLocale: "es_ES",
-    ogRole: "Full Stack Developer",
+    ogRole: "Desarrollador Front-end Semi Senior · React / Next.js / TypeScript",
+    ogAlt: "Sandro Carvalho — Desarrollador Front-end Semi Senior · React / Next.js / TypeScript",
     resumeTitle: "Currículum — Sandro Carvalho",
     resumeDescription:
-      "Currículum de Sandro Carvalho: desarrollador front-end con más de 5 años de experiencia en React, Next.js, TypeScript y Node.js.",
+      "Currículum de Sandro Carvalho: Desarrollador Front-end Semi Senior con más de 5 años de experiencia en React, Next.js y TypeScript.",
   },
 
   nav: {
     home: "Inicio",
     projects: "Proyectos",
-    resume: "Currículum",
+    resume: "Experiencias",
     blog: "Blog",
     soon: "Pronto",
     downloadPdf: "Descargar PDF",
@@ -29,43 +30,79 @@ export const es: Dictionary = {
 
   hero: {
     greeting: "Hola, soy Sandro.",
-    role: "Web Developer",
-    title: "Apasionado por transformar ideas en proyectos e interfaces eficientes.",
+    role: "Desarrollador Front-end Semi Senior · React / Next.js / TypeScript",
+    title: "Creo interfaces rápidas y escalables con React y Next.js, del prototipo a producción.",
     text: "Con más de 5 años de experiencia en Desarrollo Web, veo cada proyecto como una oportunidad para aprender, evolucionar y aportar valor a través del código.",
+    ctaProjects: "Ver proyectos",
+    ctaResume: "Descargar CV",
+    ctaContact: "Hablemos",
     avatarAlt: "Foto de Sandro Carvalho",
     linkedin: "LinkedIn de Sandro Carvalho",
     github: "GitHub de Sandro Carvalho",
   },
 
   avatar: {
-    label: "Retrato de Sandro Carvalho en ASCII. Pasa el ratón o toca para ver las tecnologías con las que trabaja.",
-    stack: "Stack",
+    label: "Retrato de Sandro Carvalho en ASCII. Pasa el ratón o toca para ver sus tecnologías principales: React, Next.js, TypeScript, JavaScript, Tailwind CSS, Node.js, React Query y Docker.",
+    stack: "Stack principal",
   },
 
   currentWork: {
     titleBefore: "Actualmente trabajo en",
     text: "Construyo interfaces dinámicas, optimizadas y escalables para el sector eléctrico, ofreciendo la mejor experiencia de usuario.",
-    siteText: "Ensayos, protección, monitoreo, control y gestión de activos en el sector eléctrico.",
-    siteAlt: "Captura del sitio web de HVEX",
   },
 
   projects: {
     title: "Proyectos",
-    juninho: "Sitio web de Juninho Personal",
-    mathias: "Sitio web de Mathias Imóveis",
+    ownership: {
+      author: "Proyecto mío",
+      work: "Desarrollado en",
+      employer: "Empresa donde trabajo",
+    },
+    role: "Mi papel",
+    highlights: "Destacados",
+    stack: "Tecnologías",
+    liveSite: "Ver sitio",
+    code: "Código",
+    newTab: "se abre en una pestaña nueva",
+    caseStudy: "Caso de estudio",
+    readCaseStudy: "Leer caso de estudio",
+    soon: "Próximamente",
   },
 
   skills: {
-    kicker: "Siempre buscando aprender y evolucionar...",
-    title: "Actualmente estoy estudiando en curso.dev",
-    text: "Estoy perfeccionando mis habilidades en React, TypeScript, Next.js y Node.js, con foco en rendimiento y escalabilidad. Además, exploro nuevas tecnologías y herramientas para mejorar mi productividad y la calidad del código.",
+    title: "Tecnologías",
+    featured: "Principales",
+    groups: {
+      frontend: "Front-end",
+      data: "Estado / Datos",
+      testing: "Pruebas",
+      tooling: "Infra / Herramientas",
+    },
+    learning: "Actualmente aprendiendo en",
   },
 
   contact: {
     title: "Contáctame",
-    text: "Escríbeme por e-mail o LinkedIn",
+    text: "Escríbeme por e-mail o LinkedIn.",
+    emailLabel: "E-mail",
+    copy: "Copiar",
+    copied: "¡Copiado!",
+    copyFailed: "No se pudo copiar",
     linkedin: "LinkedIn de Sandro Carvalho",
-    email: "Enviar un e-mail a Sandro Carvalho",
+    github: "GitHub de Sandro Carvalho",
+  },
+
+  caseStudy: {
+    back: "Volver a proyectos",
+    kicker: "Caso de estudio",
+    sections: {
+      context: "Contexto",
+      challenge: "Desafío",
+      role: "Mi actuación",
+      architecture: "Decisiones de arquitectura",
+      results: "Resultados",
+      stack: "Stack",
+    },
   },
 
   footer: {
@@ -78,16 +115,14 @@ export const es: Dictionary = {
     kicker: "Currículum",
     name: "Sandro Luis Ribeiro Carvalho",
     shortName: "Sandro Carvalho",
-    role: "Desarrollador Front-End",
+    role: "Desarrollador Front-end Semi Senior · React / Next.js / TypeScript",
     location: "Itajubá - MG, Brasil",
     available: "Listo para el próximo gran proyecto",
     labels: {
-      objective: "Objetivo",
       summary: "Resumen",
       experience: "Experiencia profesional",
       education: "Formación académica",
       courses: "Cursos y certificaciones",
-      qualities: "Principales cualidades",
       stack: "Tecnologías",
       languages: "Idiomas",
       contact: "Contacto",
@@ -103,23 +138,30 @@ export const es: Dictionary = {
       { value: 4, suffix: "", label: "empresas" },
       { value: 2, suffix: "", label: "productos llevados a producción en HVEX" },
     ],
-    objective:
-      "Trabajar como Desarrollador en el área de tecnologías de la información, aplicando mis habilidades en React, Next.js, TypeScript, Node.js y principios sólidos de usabilidad, rendimiento y arquitectura de software. Busco contribuir con soluciones escalables e innovadoras que generen valor real para la empresa y sus usuarios.",
     summary:
-      "Desarrollador con más de 5 años de experiencia creando interfaces modernas, sistemas web escalables y herramientas de alto rendimiento. Especialista en React, Next.js, TypeScript, Node.js, HTML, CSS y JavaScript, con sólida experiencia en arquitectura front-end, componentes reutilizables, integración con APIs y foco en usabilidad, accesibilidad y rendimiento. Actualmente en HVEX, liderando proyectos desde el prototipo hasta la entrega en producción. Perfil proactivo y analítico, comprometido con entregas de calidad.",
+      "Desarrollador con más de 5 años de experiencia creando interfaces modernas, sistemas web escalables y herramientas de alto rendimiento. Experiencia con React, Next.js, TypeScript, Node.js, HTML, CSS y JavaScript, con sólida experiencia en arquitectura front-end, componentes reutilizables, integración con APIs y foco en usabilidad, accesibilidad y rendimiento. Actualmente en HVEX, liderando proyectos desde el prototipo hasta la entrega en producción. Perfil proactivo y analítico, comprometido con entregas de calidad.",
     experience: [
       {
         id: "hvex",
         company: "HVEX",
         place: "Itajubá - MG, Brasil",
-        role: "Analista Desarrollador Front-End",
-        period: "May 2021 — actual",
+        role: "Desarrollador Front-end Semi Senior",
+        period: "Jun 2026 — actual",
+        bullets: [],
+        highlights: [],
+      },
+      {
+        id: "hvex-analyst",
+        company: "HVEX",
+        place: "Itajubá - MG, Brasil",
+        role: "Analista Desarrollador Front-end",
+        period: "May 2021 — Jun 2026",
         bullets: [
           "Prototipado y desarrollo de interfaces con React y Next.js (API Routes, SSR)",
           "Creación de componentes reutilizables",
           "Optimización y diseño responsivo de páginas",
           "Integración con gráficos de alto rendimiento (ApexCharts, Observable Plot)",
-          "Docker en ambas herramientas, incluida la de informes",
+          "Contenerización con Docker de las aplicaciones Shield-X y Mjolnir",
         ],
         highlights: [
           { name: "Shield-X", text: "Desarrollado desde la arquitectura hasta la entrega en producción." },
@@ -168,11 +210,7 @@ export const es: Dictionary = {
     ],
     courses: [
       { title: "curso.dev", provider: "", detail: "En curso" },
-      { title: "React: Hooks, Contextos y buenas prácticas", provider: "Alura", detail: "8h · 2024" },
-      { title: "React: Automatizando pruebas en aplicaciones front-end", provider: "Alura", detail: "6h · 2023" },
-      { title: "React: Ciclo de vida de los componentes", provider: "Alura", detail: "6h · 2023" },
-      { title: "Next.js: Primera inmersión en el framework", provider: "Alura", detail: "6h · 2023" },
-      { title: "JavaScript: Programación Orientada a Objetos", provider: "Alura", detail: "6h · 2022" },
+      { title: "Alura – React, Next.js, pruebas y JavaScript OO", provider: "", detail: "2022–2024" },
     ],
     stackGroups: {
       frontend: "Front-end",
@@ -182,14 +220,6 @@ export const es: Dictionary = {
       devops: "Infraestructura y versionado",
       tooling: "Herramientas y proceso",
     },
-    qualities: [
-      "Gran atención al detalle y a la usabilidad",
-      "Trabajo en equipo y comunicación clara",
-      "Proactividad y sentido de responsabilidad",
-      "Compromiso con la calidad, los plazos y la mejora continua",
-      "Pasión por el desarrollo y la innovación",
-      "Razonamiento lógico y autonomía para resolver problemas",
-    ],
     languages: [
       { name: "Portugués", level: "Nativo" },
       { name: "Inglés", level: "Lectura intermedia, comprensión básica; conversación en desarrollo" },
